@@ -1,8 +1,8 @@
 <template>
     <div>
       <v-layout row wrap>
-        <v-flex xs6 sm6 md4 v-for="(user, index) in users" :key="index">
-          <v-card :to="'/'+user.id" nuxt class="card">
+        <v-flex xs6 sm6 md4 v-for="(user, index) in member" :key="index">
+          <v-card :to="'/users/'+user.id" nuxt class="card">
             <v-layout row wrap>
               <v-flex xs6 sm6 md6>
                 <v-img :src=user.url aspect-ratio="1.0" class="image"></v-img>
@@ -20,7 +20,7 @@
             </v-layout>
             <v-card-actions>
           <div class="text-xs-center">
-    				<v-chip outline color="indigo darken-1" v-for="(tag, i) in tags" :key="i">{{ tags[i] }}</v-chip>
+    				<v-chip outline color="indigo darken-1" v-for="(tag, i) in user.tags" :key="i">{{ user.tags[i] }}</v-chip>
   				</div>
         </v-card-actions>
           </v-card>
@@ -32,40 +32,10 @@
 <script>
   export default {
     name: 'projectmember',
+    props: ["member"],
     data() {
       return {
-        tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala'],
-        users: [{
-            name: 'Pijo',
-            disc: 'Hello',
-            id: 1,
-            url: "https://randomuser.me/api/portraits/men/35.jpg"
-          },
-          {
-            name: 'Lico',
-            disc: 'Hello',
-            id: 2,
-            url: "https://randomuser.me/api/portraits/men/35.jpg"
-          },
-          {
-            name: 'Lico',
-            disc: 'Hello',
-            id: 2,
-            url: "https://randomuser.me/api/portraits/men/35.jpg"
-          },
-          {
-            name: 'Lico',
-            disc: 'Hello',
-            id: 3,
-            url: "https://randomuser.me/api/portraits/men/35.jpg"
-          },
-          {
-            name: 'Lico',
-            disc: 'Hello',
-            id: 4,
-            url: "https://randomuser.me/api/portraits/men/35.jpg"
-          }
-        ]
+        
       }
     }
   }

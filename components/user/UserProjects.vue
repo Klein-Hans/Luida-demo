@@ -1,7 +1,7 @@
 <template>
     <v-card>
       <v-layout row wrap>
-        <v-flex xs6 sm6 md4 v-for="(user, index) in users" :key="index">
+        <v-flex xs6 sm6 md4 v-for="(user, index) in projects" :key="index">
           <v-card :to="'/'+user.id" nuxt>
             <v-layout row wrap>
               <v-flex xs6 sm6 md6>
@@ -32,40 +32,10 @@
 <script>
   export default {
     name: 'userprojects',
+    props: ["projects"],
     data() {
       return {
-        tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala'],
-        users: [{
-            name: 'Pijo',
-            disc: 'Hello',
-            id: 1,
-            url: "https://randomuser.me/api/portraits/men/35.jpg"
-          },
-          {
-            name: 'Lico',
-            disc: 'Hello',
-            id: 2,
-            url: "https://randomuser.me/api/portraits/men/35.jpg"
-          },
-          {
-            name: 'Lico',
-            disc: 'Hello',
-            id: 2,
-            url: "https://randomuser.me/api/portraits/men/35.jpg"
-          },
-          {
-            name: 'Lico',
-            disc: 'Hello',
-            id: 3,
-            url: "https://randomuser.me/api/portraits/men/35.jpg"
-          },
-          {
-            name: 'Lico',
-            disc: 'Hello',
-            id: 4,
-            url: "https://randomuser.me/api/portraits/men/35.jpg"
-          }
-        ]
+
       }
     }
   }

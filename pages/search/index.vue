@@ -29,7 +29,7 @@
               </v-btn>
             </v-toolbar>
           </v-card>
-          <v-card v-for="(user, index) in users" :key="index" :to="'/'+user.id" nuxt>
+          <v-card v-for="(user, index) in users" :key="index" :to="'/users/'+user.id" nuxt>
             <v-layout row wrap>
               <v-flex xs6 sm6 md6>
                 <v-img :src=user.url aspect-ratio="1.0" class="image"></v-img>

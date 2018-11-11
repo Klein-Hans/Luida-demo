@@ -20,9 +20,7 @@
 			</v-toolbar-items>
     </v-toolbar>
     <v-content>
-      <v-container>
         <nuxt />
-      </v-container>
     </v-content>
     <v-navigation-drawer
       :right="right"
@@ -76,5 +74,6 @@
 .page{
   margin-top: 50px;
 }
+.wf-notosansjapanese { font-family: "Noto Sans JP"; }
 </style>
 

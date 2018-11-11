@@ -5,6 +5,10 @@ const { Nuxt, Builder } = require('nuxt')
 const app = express()
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
+const tags = require('./api/tags')
+const users = require('./api/users')
+const projects = require('./api/projects')
+const search = require('./api/search')
 
 app.set('port', port)
 
@@ -22,6 +26,10 @@ async function start() {
     await builder.build()
   }
 
+  app.use('/api/tags/', tags)
+  app.use('/api/users/', users)
+  app.use('/api/projects/', projects)
+  app.use('/api/search/', search)
   // Give nuxt middleware to express
   app.use(nuxt.render)
 
