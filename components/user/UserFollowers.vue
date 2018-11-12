@@ -15,9 +15,15 @@
                   </div>
                 </v-card-title>
                 <v-card-actions>
+                  
                 </v-card-actions>
               </v-flex>
             </v-layout>
+            <v-card-actions>
+          <div class="text-xs-center">
+    				<v-chip outline color="indigo darken-1" v-for="(tag, i) in user.tags" :key="i">{{ user.tags[i] }}</v-chip>
+  				</div>
+        </v-card-actions>
           </v-card>
         </v-flex>
       </v-layout>

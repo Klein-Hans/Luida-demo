@@ -1,19 +1,14 @@
 const Joi = require('joi');
 const mongoose = require('mongoose');
-const {userSchema} = require('./user');
 
 const projectSchema = new mongoose.Schema({
     name : {
         type: String,
-        required: true,
-        minlength: 1,
-        maxlength: 20
+        required: true
     },
     disc: {
         type: String,
-        required: true,
-        minlength: 10,
-        maxlength: 300
+        required: true
     },
     url: {
         type: String,
@@ -24,7 +19,7 @@ const projectSchema = new mongoose.Schema({
         required: true
     },
     users: {
-        type: [userSchema],
+        type: [String],
         required: false
     }
 });
@@ -33,7 +28,11 @@ const Project = mongoose.model('Project', projectSchema);
 
 function validateProject(project){
     const schema = {
-        name: Joi.string().min(3).required()
+        name: Joi.string().required(),
+        disc: Joi.string().required(),
+        url: Joi.string().required(),
+        tags: Joi.array().required(),
+        users: Joi.array().required()
     };
     return Joi.validate(project, schema);
 }

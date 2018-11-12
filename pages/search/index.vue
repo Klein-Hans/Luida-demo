@@ -8,125 +8,173 @@
         Popular Topic
       </v-card-title>
       <v-card-actions>
-        <div class="text-xs-center">
-          <v-chip label color="pink" text-color="white" v-for="(tag, i) in tags" :key="i">
-            <v-icon left dark>label</v-icon><strong>{{ tags[i] }}</strong>
-          </v-chip>
-        </div>
+        <v-item-group multiple>
+          <v-item v-for="(tag, i) in taglist" :key="i">
+            <v-chip slot-scope="{ active, toggle }" :selected="active" @click="toggle" label color="#37474F"
+              text-color="white">
+              <v-icon left dark>label</v-icon>
+              <strong>{{ taglist[i] }}</strong>
+            </v-chip>
+          </v-item>
+        </v-item-group>
       </v-card-actions>
     </v-card>
-
     <v-card>
-      <v-layout row wrap>
-        <v-flex xs6 sm6 md6>
-          <v-card>
-            <v-toolbar>
-              <v-toolbar-title>User</v-toolbar-title>
-              <v-spacer></v-spacer>
-              <span class="grey--text hidden-sm-and-down">Filter Option</span>
-              <v-btn icon>
-                <v-icon>keyboard_arrow_down</v-icon>
-              </v-btn>
-            </v-toolbar>
-          </v-card>
-          <v-card v-for="(user, index) in users" :key="index" :to="'/users/'+user.id" nuxt>
-            <v-layout row wrap>
-              <v-flex xs6 sm6 md6>
-                <v-img :src=user.url aspect-ratio="1.0" class="image"></v-img>
-              </v-flex>
-              <v-flex xs6 sm6 md6>
-                <v-card-title primary-title>
-                  <div>
-                    <h3 class="headline">{{ user.name }}</h3>
-                    <div class="text-xs-center">{{ user.disc }}</div>
-                  </div>
-                </v-card-title>
-                <v-card-actions>
-                </v-card-actions>
-              </v-flex>
-            </v-layout>
-          </v-card>
-        </v-flex>
-				<v-flex xs6 sm6 md6>
-          <v-card>
-            <v-toolbar>
-              <v-toolbar-title>Project</v-toolbar-title>
-              <v-spacer></v-spacer>
-              <span class="grey--text hidden-sm-and-down">Filter Option</span>
-              <v-btn icon>
-                <v-icon>keyboard_arrow_down</v-icon>
-              </v-btn>
-            </v-toolbar>
-          </v-card>
-          <v-card v-for="(project, index) in projects" :key="index" :to="'/projects/' + project.id" nuxt>
-            <v-layout row wrap>
-              <v-flex xs6 sm6 md6>
-                <v-img :src=project.url aspect-ratio="1.0" class="image"></v-img>
-              </v-flex>
-              <v-flex xs6 sm6 md6>
-                <v-card-title primary-title>
-                  <div>
-                    <h3 class="headline">{{ project.name }}</h3>
-                    <div class="text-xs-center">{{ project.disc }}</div>
-                  </div>
-                </v-card-title>
-                <v-card-actions>
-                </v-card-actions>
-              </v-flex>
-            </v-layout>
-          </v-card>
-        </v-flex>
-      </v-layout>
+      <v-card-text>
+        <v-container>
+          <div class="title">キャンパス</div>
+          <v-layout row wrap>
+            <v-flex xs3 sm3 md3>
+              <v-checkbox label="神楽坂" value="神楽坂"></v-checkbox>
+            </v-flex>
+            <v-flex xs3 sm3 md3>
+              <v-checkbox label="葛飾" value="葛飾"></v-checkbox>
+            </v-flex>
+            <v-flex xs3 sm3 md3>
+              <v-checkbox label="野田" value="野田"></v-checkbox>
+            </v-flex>
+            <v-flex xs3 sm3 md3>
+              <v-checkbox label="長万部" value="長万部"></v-checkbox>
+            </v-flex>
+          </v-layout>
+          <v-divider></v-divider>
+          <br>
+          <div class="title">学年</div>
+          <v-layout row wrap>
+            <v-flex xs3 sm3 md3 v-for="(g, i) in grade" :key="i">
+              <v-checkbox :label=grade[i] :value=grade[i]></v-checkbox>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-card-text>
     </v-card>
 
+    <v-card v-for="(tag, index) in tags" :key="index">
+      <v-card-title primary-title>{{ tag.name }}</v-card-title>
+      <v-card-title primary-title>Projects</v-card-title>
+      <searchlist :projects="tag.projects" />
+      <v-card-title primary-title>Users</v-card-title>
+      <searchuser :users="tag.users" />
+    </v-card>
 
 
   </div>
 </template>
 
 <script>
+  import searchlist from '~/components/search/SearchList'
+  import searchuser from '~/components/search/SearchUser'
   export default {
+    components: {
+      searchlist,
+      searchuser
+    },
     data() {
       return {
-        tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala'],
-        users: [{
-            name: 'Pijo',
-						disc: 'Hello',
-						id: 1,
-            url: "https://randomuser.me/api/portraits/men/35.jpg"
+        grade: ['D2', 'D1', 'M2', 'M1', 'B4', 'B3', 'B2', 'B1'],
+        taglist: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala', 'Java', 'Nuxt', 'Firebase', 'PHP', 'C++', 'Julia',
+          'Javascript'
+        ],
+        tags: [
+          {
+            name: 'python',
+            users: [
+              {
+                name: 'Pijo',
+                disc: 'Hello',
+                id: 1,
+                tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala'],
+                url: "https://randomuser.me/api/portraits/men/35.jpg"
+              },
+              {
+                name: 'Lico',
+                disc: 'Hello',
+                id: 2,
+                tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala'],
+                url: "https://randomuser.me/api/portraits/men/35.jpg"
+              }
+            ],
+            projects: [
+              {
+                name: 'Pijo',
+                disc: 'Hello',
+                id: 1,
+                tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala'],
+                url: "https://randomuser.me/api/portraits/men/35.jpg"
+              },
+              {
+                name: 'Lico',
+                disc: 'Hello',
+                id: 2,
+                tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala'],
+                url: "https://randomuser.me/api/portraits/men/35.jpg"
+              },{
+                name: 'Lico',
+                disc: 'Hello',
+                id: 2,
+                tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala'],
+                url: "https://randomuser.me/api/portraits/men/35.jpg"
+              },
+              {
+                name: 'Lico',
+                disc: 'Hello',
+                id: 2,
+                tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala'],
+                url: "https://randomuser.me/api/portraits/men/35.jpg"
+              },
+              {
+                name: 'Lico',
+                disc: 'Hello',
+                id: 2,
+                tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala'],
+                url: "https://randomuser.me/api/portraits/men/35.jpg"
+              },
+              {
+                name: 'Lico',
+                disc: 'Hello',
+                id: 2,
+                tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala'],
+                url: "https://randomuser.me/api/portraits/men/35.jpg"
+              }
+            ]
           },
           {
-            name: 'Lico',
-						disc: 'Hello',
-						id: 2,
-            url: "https://randomuser.me/api/portraits/men/35.jpg"
-          }
-				],
-				projects: [{
-            name: 'Pijo',
-						disc: 'Hello',
-						id: 1,
-            url: "https://randomuser.me/api/portraits/men/35.jpg"
-          },
-          {
-            name: 'Lico',
-						disc: 'Hello',
-						id: 2,
-            url: "https://randomuser.me/api/portraits/men/35.jpg"
-					},
-					{
-            name: 'Lico',
-						disc: 'Hello',
-						id: 3,
-            url: "https://randomuser.me/api/portraits/men/35.jpg"
-					},
-					{
-            name: 'Lico',
-						disc: 'Hello',
-						id: 4,
-            url: "https://randomuser.me/api/portraits/men/35.jpg"
+            name: 'ruby',
+            users: [
+              {
+                name: 'Pijo',
+                disc: 'Hello',
+                id: 1,
+                tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala'],
+                url: "https://randomuser.me/api/portraits/men/35.jpg"
+              },
+              {
+                name: 'Lico',
+                disc: 'Hello',
+                id: 2,
+                tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala'],
+                url: "https://randomuser.me/api/portraits/men/35.jpg"
+              }
+            ],
+            projects: [
+              {
+                name: 'Pijo',
+                disc: 'Hello',
+                id: 1,
+                tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala'],
+                url: "https://randomuser.me/api/portraits/men/35.jpg"
+              },
+              {
+                name: 'Lico',
+                disc: 'Hello',
+                id: 2,
+                tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala'],
+                url: "https://randomuser.me/api/portraits/men/35.jpg"
+              }
+            ]
           }
         ]
+            
       }
     }
   }

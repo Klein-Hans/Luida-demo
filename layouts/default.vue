@@ -72,7 +72,7 @@
 
 <style>
 .page{
-  margin-top: 50px;
+  margin-top: 90px;
 }
 .wf-notosansjapanese { font-family: "Noto Sans JP"; }
 </style>

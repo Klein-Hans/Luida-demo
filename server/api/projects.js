@@ -24,4 +24,26 @@ router.get('/', async (req, res) => {
     res.send(projects);
 });
 
+router.post('/', async (req, res) => {
+    const { error } = validate(req.body)
+    ;
+    if(error) return res.status(400).send(error.details[0].message);
+
+    let project = new Project({
+        name: req.body.name,
+        disc: req.body.disc,
+        url: req.body.url,
+        tags: req.body.tags,
+        users: req.body.users
+    });
+    try{
+        project = await project.save();
+        res.send(project);
+    }
+    catch(err){
+        console.log(err.message);
+    }
+});
+
+
 module.exports = router;

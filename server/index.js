@@ -9,6 +9,7 @@ const tags = require('./api/tags')
 const users = require('./api/users')
 const projects = require('./api/projects')
 const search = require('./api/search')
+const bodyParser = require('body-parser')
 
 app.set('port', port)
 
@@ -25,7 +26,8 @@ async function start() {
     const builder = new Builder(nuxt)
     await builder.build()
   }
-
+  app.use(bodyParser.json())
+  app.use(bodyParser.urlencoded({ extended: true}))
   app.use('/api/tags/', tags)
   app.use('/api/users/', users)
   app.use('/api/projects/', projects)

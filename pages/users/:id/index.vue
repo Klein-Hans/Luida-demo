@@ -90,13 +90,15 @@ export default {
 						name: 'Pijo',
             disc: 'Hello',
             id: 1,
-            url: "https://randomuser.me/api/portraits/men/35.jpg"
+						url: "https://randomuser.me/api/portraits/men/35.jpg",
+						tags: ['Python', 'node.js', 'Vue', 'Scala']
 					},
 					{
 						name: 'Pijo',
             disc: 'Hello',
             id: 2,
-            url: "https://randomuser.me/api/portraits/men/35.jpg"
+						url: "https://randomuser.me/api/portraits/men/35.jpg",
+						tags: ['Python', 'Ruby', 'Vue', 'Scala']
 					}
 				],
 				followers: [
@@ -104,13 +106,15 @@ export default {
 						name: 'Pijo',
             disc: 'Hello',
             id: 1,
-            url: "https://randomuser.me/api/portraits/men/35.jpg"
+						url: "https://randomuser.me/api/portraits/men/35.jpg",
+						tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala']
 					},
 					{
 						name: 'Pijo',
             disc: 'Hello',
             id: 2,
-            url: "https://randomuser.me/api/portraits/men/35.jpg"
+						url: "https://randomuser.me/api/portraits/men/35.jpg",
+						tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala']
 					}
 				],
 				following: [
@@ -118,19 +122,22 @@ export default {
 						name: 'Pijo',
             disc: 'Hello',
             id: 1,
-            url: "https://randomuser.me/api/portraits/men/35.jpg"
+						url: "https://randomuser.me/api/portraits/men/35.jpg",
+						tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala']
 					},
 					{
 						name: 'Pijo',
             disc: 'Hello',
             id: 2,
-            url: "https://randomuser.me/api/portraits/men/35.jpg"
+						url: "https://randomuser.me/api/portraits/men/35.jpg",
+						tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala']
 					},
 						{
 						name: 'Pijo',
             disc: 'Hello',
             id: 3,
-            url: "https://randomuser.me/api/portraits/men/35.jpg"
+						url: "https://randomuser.me/api/portraits/men/35.jpg",
+						tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala']
 					}
 				]
 			},
