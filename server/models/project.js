@@ -32,7 +32,7 @@ function validateProject(project){
         disc: Joi.string().required(),
         url: Joi.string().required(),
         tags: Joi.array().required(),
-        users: Joi.array().required()
+        users: Joi.array()
     };
     return Joi.validate(project, schema);
 }

@@ -14,8 +14,9 @@ router.get('/', async (req, res) => {
     res.send(users);
 });
 
+// View User detaile
 router.get('/:userid', async (req, res) => {
-    const projects = await Project.find({users: { _id: req.params.userid } })
+    const projects = await Project.find({users: req.params.userid});
     const users = await User.findById(req.params.userid);
     if (!users) {
         return res.status(404)
@@ -25,6 +26,7 @@ router.get('/:userid', async (req, res) => {
     res.send(users);
 });
 
+// Add new user
 router.post('/', async (req, res) => {
     const { error } = validate(req.body)
     ;
@@ -38,9 +40,9 @@ router.post('/', async (req, res) => {
         campus: req.body.campus,
         grade: req.body.grade,
         tags: req.body.tags,
-        follwers: [],
-        follwing: [],
-        projects: []
+        follwers: req.body.follwers,
+        follwing: req.body.follwing,
+        projects: req.body.projects
     });
     try{
         user = await user.save();
@@ -50,5 +52,28 @@ router.post('/', async (req, res) => {
         console.log(err.message);
     }
 });
+
+
+// User Profile Edit
+router.put('/:id', async (req, res) => {
+    const { error } = validate(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
+    const projects = await Project.find({users: req.params.id});
+    if(!projects) return res.status(400).send('Invalid username');
+
+    const user = await User.findByIdAndUpdate(req.params.id, {
+        name: req.body.name,
+        username: req.body.username,
+        disc: req.body.disc,
+        url: req.body.url,
+        campus: req.body.campus,
+        grade: req.body.grade,
+        tags: req.body.tags,
+        projects: projects
+    })
+
+    if(!user) return res.status(404).send('The user with given ID was not found');
+    res.send(user);
+})
 
 module.exports = router;

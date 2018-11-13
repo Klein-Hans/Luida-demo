@@ -1,6 +1,5 @@
 const Joi = require('joi');
 const mongoose = require('mongoose');
-const {projectSchema} = require('./project');
 
 const userSchema = new mongoose.Schema({
     name : {
@@ -40,7 +39,7 @@ const userSchema = new mongoose.Schema({
         required: false
     },
     projects: {
-        type: [projectSchema],
+        type: [String],
         required: false
     }
 });
@@ -49,13 +48,18 @@ const User = mongoose.model('User', userSchema);
 
 function validateUser(user){
     const schema = {
+        _id: Joi.string().required(),
         name: Joi.string().required(),
         username: Joi.string().required(),
         disc: Joi.string().required(),
         url: Joi.string().required(),
         campus: Joi.string().required(),
         grade: Joi.string().required(),
-        tags: Joi.array().required()
+        tags: Joi.array().required(),
+        followers: Joi.array(),
+        following: Joi.array(),
+        projects: Joi.array()
+
     };
     return Joi.validate(user, schema);
 }
