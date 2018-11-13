@@ -1,5 +1,6 @@
 const Joi = require('joi');
 const mongoose = require('mongoose');
+const {projectSchema} = require('./project')
 
 const userSchema = new mongoose.Schema({
     name : {
@@ -38,13 +39,14 @@ const userSchema = new mongoose.Schema({
         type: [String],
         required: false
     },
-    projects: {
-        type: [String],
-        required: false
-    }
+    projects: [{
+        type: mongoose.Schema.Types.ObjectId,
+        required: false,
+        ref: "Project"
+    }]
 });
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema, 'users');
 
 function validateUser(user){
     const schema = {

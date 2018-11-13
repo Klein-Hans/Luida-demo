@@ -45,7 +45,7 @@
         アカウントをお持ちではないですか？
         </div>
         <v-spacer></v-spacer>
-        <v-btn outline color="red lighten-1">登録</v-btn>
+        <v-btn to="/signup" nuxt outline color="red lighten-1">登録</v-btn>
     </v-layout>
   </form>
   </v-container>

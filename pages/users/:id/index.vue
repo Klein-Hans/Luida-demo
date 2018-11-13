@@ -6,19 +6,45 @@
 			<v-container>
         <v-card>
             <v-img
-          :src=users.url
+          :src=user.url
           aspect-ratio="1.0"
         ></v-img>
 				<v-card-title primary-title>
           <div>
-            <h3 class="headline">{{ users.username }}</h3>
-						<div class="grey--text">{{ users.name }}</div>
-            <div class="text-xs-center">{{ users.disc }}</div>
+						<v-list>
+									<v-list-tile>
+										<v-list-content class="headline">{{ user.username }}</v-list-content>
+									</v-list-tile>
+									<v-list-tile>
+										<v-list-content class="grey--text">{{ user.name }}</v-list-content>
+									</v-list-tile>
+									<br>
+									<v-list-tile>
+										<v-list-content class="text-xs-center">{{ user.disc }}</v-list-content>
+									</v-list-tile>
+									<br>
+                  <v-list-tile>
+                    <v-list-tile-action>
+                      <v-icon color="indigo">location_on</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                      <v-list-title>{{ user.campus }}</v-list-title>
+                    </v-list-tile-content>
+                  </v-list-tile>
+                  <v-list-tile>
+                    <v-list-tile-action>
+                      <v-icon color="indigo">school</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                      <v-list-title>{{ user.grade }}</v-list-title>
+                    </v-list-tile-content>
+                  </v-list-tile>
+            </v-list>
           </div>
         </v-card-title>
 				<v-card-actions>
           <div class="text-xs-center">
-    				<v-chip color="indigo darken-1" text-color="white" v-for="(tag, i) in users.tags" :key="i">{{ users.tags[i] }}</v-chip>
+    				<v-chip color="indigo darken-1" text-color="white" v-for="(tag, i) in user.tags" :key="i">{{ user.tags[i] }}</v-chip>
   				</div>
         </v-card-actions>
 				<div class="spacer"></div>
@@ -30,23 +56,23 @@
 			<v-container>
 			<v-tabs show-arrows slider-color="yellow" v-model="model" icons-and-text centered>
 
-				<v-tab href="#tab-0">
+				<v-tab href="#tab-1">
 					<v-badge left>
-					<span slot="badge">{{ users.projects.length }}</span>
+					<span slot="badge">{{ user.projects.length }}</span>
 					<span>Project</span>
 					</v-badge>
 					<v-icon>account_box</v-icon>
 				</v-tab>
-				<v-tab href="#tab-1">
+				<v-tab href="#tab-2">
 					<v-badge left>
-					<span slot="badge">{{ users.followers.length }}</span>
+					<span slot="badge">{{ user.followers.length }}</span>
 					<span>Followers</span>
 				</v-badge>
 				<v-icon>account_box</v-icon>
 				</v-tab>
-				<v-tab href="#tab-2">
+				<v-tab href="#tab-3">
 					<v-badge left>
-					<span slot="badge">{{ users.following.length }}</span>
+					<span slot="badge">{{ user.following.length }}</span>
 					<span>Following</span>
 				</v-badge>
 				<v-icon>account_box</v-icon>
@@ -54,14 +80,12 @@
 
 				<v-tabs-items v-model="model">
 					<v-tab-item
-					v-for="(tab, i) in tabs"
+					v-for="i in 3"
 					:id="'tab-' + i"
 					:key="i">
-						<v-card flat>
-							<userprojects :projects="users.projects" v-show="model == 'tab-0'" />
-							<userfollowers :followers="users.followers" v-show="model == 'tab-1'" />
-							<userfollowing :following="users.following" v-show="model == 'tab-2'" />
-						</v-card>
+							<userprojects :projects="user.projects" v-show="model == 'tab-1'" />
+							<userfollowers :followers="user.followers" v-show="model == 'tab-2'" />
+							<userfollowing :following="user.following" v-show="model == 'tab-3'" />
 					</v-tab-item>
 				</v-tabs-items>
 			</v-tabs>
@@ -76,72 +100,10 @@ import userprojects from '~/components/user/UserProjects.vue'
 import userfollowers from '~/components/user/UserFollowers.vue'
 import userfollowing from '~/components/user/UserFollowing.vue'
 import userbutton from '~/components/user/UserButton.vue'
+import axios from 'axios'
 export default {
 	data(){
 		return{
-			users: {
-				name: 'Kangaroo Valley Safari',
-				username: 'Kangaroo Valley Safari',
-				url: 'https://cdn.vuetifyjs.com/images/cards/desert.jpg',
-				disc: 'Located two hours south of Sydney in the Southern Highlands of New South Wales',
-				tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala'],
-				projects: [
-					{
-						name: 'Pijo',
-            disc: 'Hello',
-            id: 1,
-						url: "https://randomuser.me/api/portraits/men/35.jpg",
-						tags: ['Python', 'node.js', 'Vue', 'Scala']
-					},
-					{
-						name: 'Pijo',
-            disc: 'Hello',
-            id: 2,
-						url: "https://randomuser.me/api/portraits/men/35.jpg",
-						tags: ['Python', 'Ruby', 'Vue', 'Scala']
-					}
-				],
-				followers: [
-					{
-						name: 'Pijo',
-            disc: 'Hello',
-            id: 1,
-						url: "https://randomuser.me/api/portraits/men/35.jpg",
-						tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala']
-					},
-					{
-						name: 'Pijo',
-            disc: 'Hello',
-            id: 2,
-						url: "https://randomuser.me/api/portraits/men/35.jpg",
-						tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala']
-					}
-				],
-				following: [
-					{
-						name: 'Pijo',
-            disc: 'Hello',
-            id: 1,
-						url: "https://randomuser.me/api/portraits/men/35.jpg",
-						tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala']
-					},
-					{
-						name: 'Pijo',
-            disc: 'Hello',
-            id: 2,
-						url: "https://randomuser.me/api/portraits/men/35.jpg",
-						tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala']
-					},
-						{
-						name: 'Pijo',
-            disc: 'Hello',
-            id: 3,
-						url: "https://randomuser.me/api/portraits/men/35.jpg",
-						tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala']
-					}
-				]
-			},
-			tabs: ['Projects', 'Followers', 'Following'],
 			model: 'tab-0'
 		}
 	},
@@ -150,6 +112,11 @@ export default {
 		userfollowers,
 		userfollowing,
 		userbutton
+	},
+	async asyncData({params}) {
+		const url = "http://127.0.0.1:3000/api/users/"
+		let { data } = await axios.get(`${url}${params.id}`)
+		return { user: data }
 	}
 }
 </script>

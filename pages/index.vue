@@ -7,7 +7,7 @@
         <v-container>
         <div class="grey--text lighten-5 headline font-weight-medium">RikaHubは理科大生のための開発プラットフォームです。実験からシミュレーション、オープンソースプロジェクトまで、RikaHun上でプロジェクトチームを作成することで他の理科大生と一緒にプログラミング、IoT、ビジネスに挑戦することができます。</div>
         </v-container>
-        <v-btn color="#00C853" dark class="font-weight-black" large>
+        <v-btn to="/signup" nuxt color="#00C853" dark class="font-weight-black" large>
           Getting started</v-btn>
       </div>
     </v-container>
@@ -18,7 +18,7 @@
     <div class="mb-2 display-1 font-weight-bold">
       異なる分野の融合をスマートに
     </div>
-    <v-btn color="#00C853" outline class="font-weight-black" large>
+    <v-btn to="/signup" nuxt color="#00C853" outline class="font-weight-black" large>
           Getting started</v-btn>
   </v-container>
   <v-container>

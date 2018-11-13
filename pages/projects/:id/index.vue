@@ -6,7 +6,7 @@
 			<v-container>
         <v-card>
             <v-img
-          src="https://cdn.vuetifyjs.com/images/cards/desert.jpg"
+          :src=project.url
           aspect-ratio="1.0"
         ></v-img>
 				<v-card-title primary-title>
@@ -38,55 +38,20 @@
 
 <script>
 import projectmember from '~/components/project/ProjectMember.vue'
+import axios from 'axios'
 export default {
 	data(){
 		return{
-      project: {
-        name: 'Rakuten Luida',
-        disc: 'This is internship program',
-        tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala'],
-        users: [{
-            name: 'Pijo',
-            disc: 'Hello',
-            id: 1,
-            tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala'],
-            url: "https://randomuser.me/api/portraits/men/35.jpg"
-          },
-          {
-            name: 'Lico',
-            disc: 'Hello',
-            id: 2,
-            tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala'],
-            url: "https://randomuser.me/api/portraits/men/35.jpg"
-          },
-          {
-            name: 'Lico',
-            disc: 'Hello',
-            id: 3,
-            tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala'],
-            url: "https://randomuser.me/api/portraits/men/35.jpg"
-          },
-          {
-            name: 'Lico',
-            disc: 'Hello',
-            id: 4,
-            tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala'],
-            url: "https://randomuser.me/api/portraits/men/35.jpg"
-          },
-          {
-            name: 'Lico',
-            disc: 'Hello',
-            id: 5,
-            tags: ['Python', 'Ruby', 'golang', 'node.js', 'Vue', 'Scala'],
-            url: "https://randomuser.me/api/portraits/men/35.jpg"
-          }
-        ]
-      },
       tabs: ['Overview', 'Projects', 'Member', 'Follows', 'Following']
     }
   },
   components: {
     projectmember
+  },
+  async asyncData({params}){
+    const url = "http://127.0.0.1:3000/api/projects/"
+    let { data } = await axios.get(`${url}${params.id}`)
+    return {project: data}
   }
 }
 </script>

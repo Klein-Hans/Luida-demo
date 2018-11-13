@@ -1,7 +1,7 @@
 <template>
     <v-card>
       <v-layout row wrap>
-        <v-flex xs6 sm6 md4 v-for="(user, index) in projects" :key="index">
+        <v-flex xs12 sm6 md4 v-for="(user, index) in projects" :key="index">
           <v-card :to="'/'+user.id" nuxt>
             <v-layout row wrap>
               <v-flex xs6 sm6 md6>
@@ -10,12 +10,18 @@
               <v-flex xs6 sm6 md6>
                 <v-card-title primary-title>
                   <div>
-                    <h3 class="headline">{{ user.name }}</h3>
-                    <div class="text-xs-center">{{ user.disc }}</div>
+                    <v-list>
+									<v-list-tile>
+										<v-list-content class="text-xs-center">{{ user.name }}</v-list-content>
+									</v-list-tile>
+									<br>
+									<v-list-tile>
+										<v-list-content class="grey--text">{{ user.disc }}</v-list-content>
+									</v-list-tile>
+									<br>
+            </v-list>
                   </div>
                 </v-card-title>
-                <v-card-actions>
-                </v-card-actions>
               </v-flex>
             </v-layout>
             <v-card-actions>

@@ -9,12 +9,10 @@ mongoose.connect('mongodb://localhost/luidatest')
 .catch(err => console.log('Could not connect to MongoDB'));
 
 // get a project detaile
-router.get('/:projectid', async (req, res) => {
-    const users = await User.find({projects: req.params.projectid});
-    const projects = await Project.findById(req.params.projectid);
+router.get('/:id', async (req, res) => {
+    const projects = await Project.findById(req.params.id).populate('users');
     if(!projects) return res.status(404)
     .send('The project with the given ID was not found.')
-    projects.users = users
     res.send(projects);
 });
 
@@ -54,7 +52,8 @@ router.post('/', async (req, res) => {
 router.put('/:id', async(req, res) => {
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
-    const users = await User.find({projects: req.params.id});
+    const project_temp = await Project.findById(req.params.id).select("users");
+    const users = await User.findById(project_temp.users).select("_id");
     if(!users) return res.status(400).send('Invalid Projects ID');
 
     const project = await Project.findByIdAndUpdate(req.params.id, {

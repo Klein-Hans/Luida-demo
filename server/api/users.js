@@ -15,14 +15,12 @@ router.get('/', async (req, res) => {
 });
 
 // View User detaile
-router.get('/:userid', async (req, res) => {
-    const projects = await Project.find({users: req.params.userid});
-    const users = await User.findById(req.params.userid);
+router.get('/:id', async (req, res) => {
+    const users = await User.findById(req.params.id).populate('projects')
     if (!users) {
         return res.status(404)
     .send('The user with the given ID was not found.');
     };
-    users.projects = projects;
     res.send(users);
 });
 
@@ -58,7 +56,8 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
-    const projects = await Project.find({users: req.params.id});
+    const user_temp = await User.findById(req.params.id).select("users");
+    const projects = await Project.findById(user_temp.projects).select("_id");
     if(!projects) return res.status(400).send('Invalid username');
 
     const user = await User.findByIdAndUpdate(req.params.id, {

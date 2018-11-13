@@ -18,7 +18,7 @@
         Rikahubアカウントをお持ちですか？
         </div>
         <v-spacer></v-spacer>
-        <v-btn outline color="red lighten-1">ログイン</v-btn>
+        <v-btn to="/login" nuxt outline color="red lighten-1">ログイン</v-btn>
     </v-layout>
   </v-container>
   </div>

@@ -2,7 +2,7 @@
     <div>
       <v-layout row wrap>
         <v-flex xs6 sm6 md4 v-for="(user, index) in member" :key="index">
-          <v-card :to="'/users/'+user.id" nuxt class="card">
+          <v-card :to="'/users/'+user._id" nuxt class="card">
             <v-layout row wrap>
               <v-flex xs6 sm6 md6>
                 <v-img :src=user.url aspect-ratio="1.0" class="image"></v-img>

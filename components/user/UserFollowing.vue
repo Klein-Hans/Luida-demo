@@ -14,14 +14,39 @@
                     <div class="text-xs-center">{{ user.disc }}</div>
                   </div>
                 </v-card-title>
-                <v-card-actions>
-                </v-card-actions>
               </v-flex>
             </v-layout>
             <v-card-actions>
-          <div class="text-xs-center">
-    				<v-chip outline color="indigo darken-1" v-for="(tag, i) in user.tags" :key="i">{{ user.tags[i] }}</v-chip>
-  				</div>
+          <v-layout row wrap>
+                <v-flex xs12 sm12>
+                  <div class="text-xs-center">
+                <v-list>
+                  <v-list-tile>
+                    <v-list-tile-action>
+                      <v-icon color="indigo">location_on</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                      <v-list-title>{{ user.campus }}</v-list-title>
+                    </v-list-tile-content>
+                  </v-list-tile>
+                  <v-list-tile>
+                    <v-list-tile-action>
+                      <v-icon color="indigo">school</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                      <v-list-title>{{ user.grade }}</v-list-title>
+                    </v-list-tile-content>
+                  </v-list-tile>
+                </v-list>
+              </div>
+                </v-flex>
+                <v-flex xs12 sm12>
+                  <div class="text-xs-center">
+                  <v-chip outline color="indigo darken-1" v-for="(tag, i) in user.tags" :key="i">{{ user.tags[i] }}</v-chip>
+                </div>
+                </v-flex>
+                
+              </v-layout>
         </v-card-actions>
           </v-card>
         </v-flex>
