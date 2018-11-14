@@ -31,7 +31,7 @@ router.post('/', async (req, res) => {
     if(error) return res.status(400).send(error.details[0].message);
 
     let user = new User({
-        name: req.body.name,
+        _id: req.body.id,
         username: req.body.username,
         disc: req.body.disc,
         url: req.body.url,

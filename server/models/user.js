@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const {projectSchema} = require('./project')
 
 const userSchema = new mongoose.Schema({
-    name : {
+    _id: {
         type: String,
         required: true
     },
@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
     },
     disc: {
         type: String,
-        required: true
+        required: false
     },
     grade: {
         type: String,
@@ -50,11 +50,10 @@ const User = mongoose.model('User', userSchema, 'users');
 
 function validateUser(user){
     const schema = {
-        _id: Joi.string().required(),
-        name: Joi.string().required(),
+        id: Joi.string().required(),
         username: Joi.string().required(),
-        disc: Joi.string().required(),
-        url: Joi.string().required(),
+        disc: Joi.string(),
+        url: Joi.string(),
         campus: Joi.string().required(),
         grade: Joi.string().required(),
         tags: Joi.array().required(),

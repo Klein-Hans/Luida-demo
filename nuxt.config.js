@@ -36,7 +36,8 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/vuetify'
+    '@/plugins/vuetify',
+    '~/plugins/fireauth.js'
   ],
 
   /*
@@ -63,5 +64,9 @@ module.exports = {
     extend(config, ctx) {
       
     }
+  },
+
+  router: {
+    middleware: 'router-auth'
   }
 }
