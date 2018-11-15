@@ -43,6 +43,11 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: false,
         ref: "Project"
+    }],
+    questions: [{
+        type: mongoose.Schema.Types.ObjectId,
+        required: false,
+        ref: "Question"
     }]
 });
 
@@ -59,7 +64,8 @@ function validateUser(user){
         tags: Joi.array().required(),
         followers: Joi.array(),
         following: Joi.array(),
-        projects: Joi.array()
+        projects: Joi.array(),
+        questions: Joi.array()
 
     };
     return Joi.validate(user, schema);
