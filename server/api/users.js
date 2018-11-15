@@ -1,5 +1,4 @@
 const {User, validate} = require('../models/user');
-const {Project} = require('../models/project');
 const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
@@ -56,19 +55,15 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
-    const user_temp = await User.findById(req.params.id).select("users");
-    const projects = await Project.findById(user_temp.projects).select("_id");
-    if(!projects) return res.status(400).send('Invalid username');
 
     const user = await User.findByIdAndUpdate(req.params.id, {
-        name: req.body.name,
         username: req.body.username,
         disc: req.body.disc,
         url: req.body.url,
         campus: req.body.campus,
         grade: req.body.grade,
         tags: req.body.tags,
-        projects: projects
+        projects: req.body.projects
     })
 
     if(!user) return res.status(404).send('The user with given ID was not found');
