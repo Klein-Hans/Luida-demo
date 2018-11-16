@@ -3,14 +3,20 @@ import Vuex from 'vuex'
 const createStore = () => {
   return new Vuex.Store({
     state: {
-      userid: null
+      authUser: null
     },
     mutations: {
-      setUserId(state, userid){
-        state.userid = userid
+      setUserId(state, authUser){
+        state.authUser = authUser
+        console.log(authUser)
       },
       signOut(state){
-        state.userid = null
+        state.authUser = null
+      }
+    },
+    getters: {
+      getTags: (state, getters) => {
+        return this.$store.state.tags
       }
     }
   })

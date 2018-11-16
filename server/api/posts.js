@@ -7,7 +7,7 @@ mongoose.connect('mongodb://localhost/luidatest')
 .catch(err => console.log('Could not connect to MongoDB'));
 
 router.get('/', async (req, res) => {
-    var arr =  JSON.parse(req.query.array);
+    var arr =  req.query.array;
     const questions = await Question.find({ tags: { $in: arr}
     });
     if (!questions) return res.status(404)

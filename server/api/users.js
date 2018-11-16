@@ -36,10 +36,7 @@ router.post('/', async (req, res) => {
         url: req.body.url,
         campus: req.body.campus,
         grade: req.body.grade,
-        tags: req.body.tags,
-        follwers: req.body.follwers,
-        follwing: req.body.follwing,
-        projects: req.body.projects
+        tags: req.body.tags
     });
     try{
         user = await user.save();
@@ -63,7 +60,8 @@ router.put('/:id', async (req, res) => {
         campus: req.body.campus,
         grade: req.body.grade,
         tags: req.body.tags,
-        projects: req.body.projects
+        projects: req.body.projects,
+        quesitons: req.body.quesitons
     })
 
     if(!user) return res.status(404).send('The user with given ID was not found');

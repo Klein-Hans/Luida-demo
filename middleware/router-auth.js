@@ -1,6 +1,6 @@
 export default function ({ store, redirect, route }) {
-    store.state.userid != null && route.name == 'login' ? redirect('/') : ''
-    store.state.userid == null && isAdminRoute(route) ? redirect('/login') : ''
+    store.state.authUser != null && route.name == 'login' ? redirect('/') : ''
+    store.state.authUser == null && isAdminRoute(route) ? redirect('/login') : ''
   }
   
   function isAdminRoute(route) {

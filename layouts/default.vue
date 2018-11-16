@@ -4,6 +4,7 @@
     <v-toolbar
       fixed
       color="white"
+      v-show="$store.state.authUser !== null"
     >
       <v-spacer></v-spacer>
 			<v-toolbar-items class="toolbar-imtes">
@@ -11,9 +12,7 @@
 					<v-icon class="icon">search</v-icon>
         </v-btn>
         <messagelist />
-        <v-btn icon to="/" nuxt>
-          <v-icon class="icon">home</v-icon>
-				</v-btn>
+        <profileInNavbar />
 				<v-btn icon @click.stop="rightDrawer = !rightDrawer" class="hidden-md-and-up">
 					<v-icon class="icon">menu</v-icon>
 				</v-btn>
@@ -41,13 +40,14 @@
       :fixed="fixed"
       app
     >
-      <span>&copy; 2017</span>
+      <span>&copy; 2018</span>
     </v-footer>
   </v-app>
 </template>
 
 <script>
   import messagelist from '~/components/defaultpage/MessageList.vue'
+  import profileInNavbar from '~/components/defaultpage/Profile.vue'
   export default {
     data() {
       return {
@@ -65,7 +65,8 @@
       }
     },
     components: {
-      messagelist
+      messagelist,
+      profileInNavbar
     }
   }
 </script>

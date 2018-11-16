@@ -31,14 +31,6 @@ const userSchema = new mongoose.Schema({
         type: [String],
         required: true
     },
-    followers : {
-        type: [String],
-        required: false
-    },
-    following : {
-        type: [String],
-        required: false
-    },
     projects: [{
         type: mongoose.Schema.Types.ObjectId,
         required: false,
@@ -61,12 +53,7 @@ function validateUser(user){
         url: Joi.string(),
         campus: Joi.string().required(),
         grade: Joi.string().required(),
-        tags: Joi.array().required(),
-        followers: Joi.array(),
-        following: Joi.array(),
-        projects: Joi.array(),
-        questions: Joi.array()
-
+        tags: Joi.array().required()
     };
     return Joi.validate(user, schema);
 }

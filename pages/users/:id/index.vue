@@ -13,12 +13,8 @@
           <div>
 						<v-list>
 									<v-list-tile>
-										<v-list-content class="headline">{{ user.username }}</v-list-content>
+										<v-list-content class="display-1">{{ user.username }}</v-list-content>
 									</v-list-tile>
-									<v-list-tile>
-										<v-list-content class="grey--text">{{ user.name }}</v-list-content>
-									</v-list-tile>
-									<br>
 									<v-list-tile>
 										<v-list-content class="text-xs-center">{{ user.disc }}</v-list-content>
 									</v-list-tile>
@@ -42,6 +38,7 @@
             </v-list>
           </div>
         </v-card-title>
+				<v-divider></v-divider>
 				<v-card-actions>
           <div class="text-xs-center">
     				<v-chip color="indigo darken-1" text-color="white" v-for="(tag, i) in user.tags" :key="i">{{ user.tags[i] }}</v-chip>
@@ -54,41 +51,7 @@
     </v-flex>
 		<v-flex xs12 sm7 md8>
 			<v-container>
-			<v-tabs show-arrows slider-color="yellow" v-model="model" icons-and-text centered>
-
-				<v-tab href="#tab-1">
-					<v-badge left>
-					<span slot="badge">{{ user.projects.length }}</span>
-					<span>Project</span>
-					</v-badge>
-					<v-icon>account_box</v-icon>
-				</v-tab>
-				<v-tab href="#tab-2">
-					<v-badge left>
-					<span slot="badge">{{ user.followers.length }}</span>
-					<span>Followers</span>
-				</v-badge>
-				<v-icon>account_box</v-icon>
-				</v-tab>
-				<v-tab href="#tab-3">
-					<v-badge left>
-					<span slot="badge">{{ user.following.length }}</span>
-					<span>Following</span>
-				</v-badge>
-				<v-icon>account_box</v-icon>
-				</v-tab>
-
-				<v-tabs-items v-model="model">
-					<v-tab-item
-					v-for="i in 3"
-					:id="'tab-' + i"
-					:key="i">
-							<userprojects :projects="user.projects" v-show="model == 'tab-1'" />
-							<userfollowers :followers="user.followers" v-show="model == 'tab-2'" />
-							<userfollowing :following="user.following" v-show="model == 'tab-3'" />
-					</v-tab-item>
-				</v-tabs-items>
-			</v-tabs>
+				<userproject :projects="user.projects" />
 			</v-container>
 		</v-flex>
 		
@@ -96,9 +59,7 @@
 </template>
 
 <script>
-import userprojects from '~/components/user/UserProjects.vue'
-import userfollowers from '~/components/user/UserFollowers.vue'
-import userfollowing from '~/components/user/UserFollowing.vue'
+import userproject from '~/components/user/UserProject.vue'
 import userbutton from '~/components/user/UserButton.vue'
 import axios from 'axios'
 export default {
@@ -108,9 +69,7 @@ export default {
 		}
 	},
 	components: {
-		userprojects,
-		userfollowers,
-		userfollowing,
+		userproject,
 		userbutton
 	},
 	async asyncData({params}) {

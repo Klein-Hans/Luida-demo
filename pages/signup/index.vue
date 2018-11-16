@@ -115,21 +115,19 @@
     methods: {
       signUp() {
         firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
-          .then(() => {
-            var user = firebase.auth().currentUser
-            this.$store.commit('setUserId', user.uid)
-            axios.post("http://127.0.0.1:3000/api/users/", {
-              id: user.uid, 
+          .then( async () => {
+            var user = await firebase.auth().currentUser.uid
+            var id = user.toString()
+            var userinfo = await axios.post("http://127.0.0.1:3000/api/users/", {
+              id: id, 
               username: this.username,
               disc: "Hello! My name is " + this.username,
               url: 'https://www.tus.ac.jp/info/about/images/chara01.jpg',
               campus: this.campus,
               grade: this.grade,
-              tags: this.tags,
-              follwers: [],
-              follwing: [],
-              projects: []
+              tags: this.tags
             })
+            this.$store.commit('setUserId', id)
             this.step++
           })
           .catch(error => {

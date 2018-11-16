@@ -1,5 +1,4 @@
 const {Project, validate} = require('../models/project');
-const {User} = require('../models/user');
 const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
@@ -33,7 +32,6 @@ router.post('/', async (req, res) => {
     if(error) return res.status(400).send(error.details[0].message);
 
     let project = new Project({
-        _id: mongoose.Types.ObjectId(req.body.id),
         name: req.body.name,
         disc: req.body.disc,
         url: req.body.url,
@@ -52,17 +50,13 @@ router.post('/', async (req, res) => {
 router.put('/:id', async(req, res) => {
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
-    const project_temp = await Project.findById(req.params.id).select("users");
-    const users = await User.findById(project_temp.users).select("_id");
-    if(!users) return res.status(400).send('Invalid Projects ID');
 
     const project = await Project.findByIdAndUpdate(req.params.id, {
-        _id: mongoose.Types.ObjectId(req.params.id),
         name: req.body.name,
         disc: req.body.disc,
         url: req.body.url,
         tags: req.body.tags,
-        users: users
+        users: req.body.users
     });
 
     if(!project) return res.status(404).send('The project with given ID was not found');
