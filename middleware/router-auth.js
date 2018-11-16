@@ -1,12 +1,10 @@
 export default function ({ store, redirect, route }) {
-    store.state.authUser != null && route.name == 'login' ? redirect('/') : ''
-    store.state.authUser == null && isAdminRoute(route) ? redirect('/login') : ''
+  if(!store.getters.isAuthenticated && route.name !== 'login' && route.name !== 'signup'){
+    redirect('/login')
+  }
+  if(store.getters.isAuthenticated && (route.name === 'login' || route.name === 'signup')){
+    redirect('/users/' + store.state.authUser)
+  }
   }
   
-  function isAdminRoute(route) {
-    if (route.matched.some(record => record.path == '/')) {
-      return true
-    }
-  }
-
   // need to edit admin root meaning '/'

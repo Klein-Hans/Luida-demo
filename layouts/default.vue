@@ -4,7 +4,7 @@
     <v-toolbar
       fixed
       color="white"
-      v-show="$store.state.authUser !== null"
+      v-show="$store.getters.isAuthenticated"
     >
       <v-spacer></v-spacer>
 			<v-toolbar-items class="toolbar-imtes">
@@ -12,6 +12,7 @@
 					<v-icon class="icon">search</v-icon>
         </v-btn>
         <messagelist />
+        <invitationList />
         <profileInNavbar />
 				<v-btn icon @click.stop="rightDrawer = !rightDrawer" class="hidden-md-and-up">
 					<v-icon class="icon">menu</v-icon>
@@ -22,17 +23,56 @@
         <nuxt />
     </v-content>
     <v-navigation-drawer
-      :right="right"
+      right
       v-model="rightDrawer"
       temporary
       fixed
     >
       <v-list>
-        <v-list-tile @click.native="right = !right">
+        <v-list-tile avatar :to="'/users/' + $store.state.authUser">
+          <v-list-tile-avatar>
+            <img :src="$store.state.authUrl">
+          </v-list-tile-avatar>
+          <v-list-tile-content>
+            <v-list-tile-title>{{ $store.state.authName }}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-divider></v-divider>
+        <v-list-tile to="/search" nuxt>
           <v-list-tile-action>
-            <v-icon light>compare_arrows</v-icon>
+            <v-icon light>search</v-icon>
           </v-list-tile-action>
-          <v-list-tile-title>Switch drawer (click me)</v-list-tile-title>
+          <v-list-tile-title>Search</v-list-tile-title>
+        </v-list-tile>
+        <v-list-tile>
+          <v-list-tile-action>
+            <v-icon light>message</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-title>Message</v-list-tile-title>
+        </v-list-tile>
+        <v-list-tile to="/questions" nuxt>
+          <v-list-tile-action>
+            <v-icon light>timeline</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-title>Timeline</v-list-tile-title>
+        </v-list-tile>
+        <v-list-tile>
+          <v-list-tile-action>
+            <v-icon light>notifications</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-title>Notification</v-list-tile-title>
+        </v-list-tile>
+        <v-list-tile>
+          <v-list-tile-action>
+            <v-icon light>settings</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-title>Setting</v-list-tile-title>
+        </v-list-tile>
+        <v-list-tile>
+          <v-list-tile-action>
+            <v-icon light>help</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-title>Help</v-list-tile-title>
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
@@ -47,6 +87,7 @@
 
 <script>
   import messagelist from '~/components/defaultpage/MessageList.vue'
+  import invitationList from '~/components/defaultpage/InvitationList.vue'
   import profileInNavbar from '~/components/defaultpage/Profile.vue'
   export default {
     data() {
@@ -66,6 +107,7 @@
     },
     components: {
       messagelist,
+      invitationList,
       profileInNavbar
     }
   }

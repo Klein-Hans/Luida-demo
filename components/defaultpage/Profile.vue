@@ -2,7 +2,7 @@
   <v-menu offset-y>
     <v-btn slot="activator" flat>
       <v-avatar>
-        <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
+        <img :src=$store.state.authUrl>
       </v-avatar>
     </v-btn>
     <v-list>
@@ -35,6 +35,7 @@
     methods: {
       signOut(){
         this.$store.commit('signOut')
+        this.$router.push('/')
       }
     }
   }

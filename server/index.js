@@ -11,6 +11,7 @@ const projects = require('./api/projects')
 const search = require('./api/search')
 const bodyParser = require('body-parser')
 const posts = require('./api/posts')
+const invitations = require('./api/invitations')
 
 app.set('port', port)
 
@@ -34,6 +35,7 @@ async function start() {
   app.use('/api/projects/', projects)
   app.use('/api/search/', search)
   app.use('/api/posts/', posts)
+  app.use('/api/invitations', invitations)
   // Give nuxt middleware to express
   app.use(nuxt.render)
 

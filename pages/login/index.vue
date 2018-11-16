@@ -4,13 +4,11 @@
   <form class="form">
     <v-text-field
       v-model="email"
-      :error-messages="emailErrors"
       label="E-mail"
       required
     ></v-text-field>
     <v-text-field
       v-model="password"
-      :error-messages="passwordErrors"
       label="Password"
       required
     ></v-text-field>
@@ -32,6 +30,7 @@
 
 <script>
   import firebase from 'firebase'
+import Axios from 'axios';
 
   export default {
     data: () => ({
@@ -40,14 +39,19 @@
     }),
     methods: {
       signIn(){
+        const url = "http://127.0.0.1:3000/api/users/"
         firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-        .then(() => {
-          alert('WelcomeBack', user)
-          var user = firebase.auth().currentUser
-          this.$store.commit('setUserId', user.uid)
+        .then( async () => {
+          var user = await firebase.auth().currentUser.uid
+          var id = user.toString()
+          var { data } = await axios.get(`${url}${id}`)
+          this.$store.commit('setUserId', id)
+          this.$store.commit('setTags', data.tags)
+          this.$store.commit('setUrl', data.url)
+          this.$store.commit('setName', data.username)
         })
         .catch(error => {
-          alert(error)
+          alert(error.message)
         })
       },
       clear () {

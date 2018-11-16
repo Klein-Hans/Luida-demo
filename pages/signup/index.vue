@@ -128,6 +128,9 @@
               tags: this.tags
             })
             this.$store.commit('setUserId', id)
+            this.$store.commit('setTags', this.tags)
+            this.$store.commit('setUrl', 'https://www.tus.ac.jp/info/about/images/chara01.jpg')
+            this.$store.commit('setName', this.username)
             this.step++
           })
           .catch(error => {

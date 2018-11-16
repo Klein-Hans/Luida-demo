@@ -26,7 +26,7 @@
                 </v-list-tile-sub-title>
               </v-list-tile-content>
             </v-list-tile>
-            <v-divider :key="index"></v-divider>
+            <v-divider :key="index" v-show="index < items.length - 1"></v-divider>
           </template>
         </v-list>
   </v-menu>
