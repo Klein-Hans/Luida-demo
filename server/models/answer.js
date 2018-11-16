@@ -12,6 +12,10 @@ const answerSchema = new mongoose.Schema({
     content: {
         type: String,
         required: true
+    },
+    favorite: {
+        type: Number,
+        required: false
     }
 });
 

@@ -26,7 +26,11 @@ const questionSchema = new mongoose.Schema({
         type: Object,
         required: false,
         ref: "Answer"
-    }]
+    }],
+    favorite: {
+        type: Number,
+        required: false
+    }
 });
 
 const Question = mongoose.model('Question', questionSchema, 'posts');
@@ -37,8 +41,7 @@ function validateQuestion(question){
         date: Joi.date().required(),
         title: Joi.string().required(),
         content: Joi.string().required(),
-        tags: Joi.array().required(),
-        answer: Joi.array()
+        tags: Joi.array().required()
 
     };
     return Joi.validate(question, schema);

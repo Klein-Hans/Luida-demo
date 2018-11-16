@@ -36,8 +36,7 @@ router.post('/', async (req, res) => {
         date: req.body.date,
         title: req.body.title,
         content: req.body.content,
-        tags: req.body.tags,
-        answer: req.body.answer
+        tags: req.body.tags
     });
     try{
         question = await question.save();
@@ -60,7 +59,8 @@ router.put('/:id', async (req, res) => {
         title: req.body.title,
         content: req.body.content,
         tags: req.body.content,
-        answer: req.body.answer
+        answer: req.body.answer,
+        favorite: req.body.answer
     })
 
     if(!quesiton) return res.status(404).send('The question with given ID was not found');
