@@ -6,6 +6,7 @@ mongoose.connect('mongodb://localhost/luidatest')
 .then(() => console.log('connected to Mongodb...'))
 .catch(err => console.log('Could not connect to MongoDB'));
 
+// get all user for debuging
 router.get('/', async (req, res) => {
     const users = await User.find();
     if (!users) return res.status(404)
