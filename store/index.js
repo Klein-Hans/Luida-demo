@@ -27,7 +27,7 @@ const createStore = () => {
     },
     getters: {
       isAuthenticated: (state) => {
-        return !!state.authUser
+        return state.authUser
       }
     }
   })

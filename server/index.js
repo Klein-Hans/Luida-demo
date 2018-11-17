@@ -13,6 +13,7 @@ const bodyParser = require('body-parser')
 const questions = require('./api/questions')
 const answers = require('./api/answers')
 const invitations = require('./api/invitations')
+const icons = require('./api/icons')
 
 app.set('port', port)
 
@@ -38,6 +39,7 @@ async function start() {
   app.use('/api/questions/', questions)
   app.use('/api/answers/', answers)
   app.use('/api/invitations', invitations)
+  app.use('/api/icons', icons)
   // Give nuxt middleware to express
   app.use(nuxt.render)
 

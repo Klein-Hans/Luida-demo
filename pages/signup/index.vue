@@ -116,22 +116,22 @@
       signUp() {
         firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
           .then( async () => {
+            var { data } = await axios.get("http://127.0.0.1:3000/api/icons/circle")
             var user = await firebase.auth().currentUser.uid
             var id = user.toString()
-            var icon = await axios.get("https://avataaars-api.now.sh/")
             var userinfo = await axios.post("http://127.0.0.1:3000/api/users/", {
               id: id, 
               username: this.username,
               disc: "Hello! My name is " + this.username,
-              url: icon.url,
+              url: data.url,
               campus: this.campus,
               grade: this.grade,
               tags: this.tags
             })
             this.$store.commit('setUserId', id)
             this.$store.commit('setTags', this.tags)
-            this.$store.commit('setUrl', 'https://www.tus.ac.jp/info/about/images/chara01.jpg')
-            this.$store.commit('setName', this.username)
+            this.$store.commit('setName', this.username),
+            this.$store.commit('setUrl', data.url)
             this.step++
           })
           .catch(error => {

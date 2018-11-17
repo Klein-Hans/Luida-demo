@@ -13,10 +13,10 @@
           <div>
 						<v-list>
 									<v-list-tile>
-										<v-list-content class="display-1">{{ user.username }}</v-list-content>
+										<v-list-tile-content class="display-1">{{ user.username }}</v-list-tile-content>
 									</v-list-tile>
 									<v-list-tile>
-										<v-list-content class="text-xs-center">{{ user.disc }}</v-list-content>
+										<v-list-tile-content class="text-xs-center">{{ user.disc }}</v-list-tile-content>
 									</v-list-tile>
 									<br>
                   <v-list-tile>
@@ -24,7 +24,7 @@
                       <v-icon color="indigo">location_on</v-icon>
                     </v-list-tile-action>
                     <v-list-tile-content>
-                      <v-list-title>{{ user.campus }}</v-list-title>
+                      <v-list-tile-title>{{ user.campus }}</v-list-tile-title>
                     </v-list-tile-content>
                   </v-list-tile>
                   <v-list-tile>
@@ -32,7 +32,7 @@
                       <v-icon color="indigo">school</v-icon>
                     </v-list-tile-action>
                     <v-list-tile-content>
-                      <v-list-title>{{ user.grade }}</v-list-title>
+                      <v-list-tile-title>{{ user.grade }}</v-list-tile-title>
                     </v-list-tile-content>
                   </v-list-tile>
             </v-list>

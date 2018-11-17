@@ -4,7 +4,7 @@
     <v-toolbar
       fixed
       color="white"
-      v-show="$store.getters.isAuthenticated"
+      v-show="$store.getters.isAuthenticated !== null"
     >
       <v-spacer></v-spacer>
 			<v-toolbar-items class="toolbar-imtes">
@@ -31,7 +31,7 @@
       <v-list>
         <v-list-tile avatar :to="'/users/' + $store.state.authUser">
           <v-list-tile-avatar>
-            <img :src="$store.state.authUrl">
+            <img :src=$store.state.authUrl>
           </v-list-tile-avatar>
           <v-list-tile-content>
             <v-list-tile-title>{{ $store.state.authName }}</v-list-tile-title>
