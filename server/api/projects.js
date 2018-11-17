@@ -9,7 +9,7 @@ mongoose.connect('mongodb://localhost/luidatest')
 
 // get a project detaile
 router.get('/:id', async (req, res) => {
-    const projects = await Project.findById(req.params.id).populate('users');
+    const projects = await Project.findById(req.params.id).populate('users admin');
     if(!projects) return res.status(404)
     .send('The project with the given ID was not found.')
     res.send(projects);
@@ -36,7 +36,7 @@ router.post('/', async (req, res) => {
         disc: req.body.disc,
         url: req.body.url,
         tags: req.body.tags,
-        users: req.body.users
+        admin: req.body.admin
     });
     try{
         project = await project.save();
@@ -48,15 +48,13 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/:id', async(req, res) => {
-    const { error } = validate(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
-
     const project = await Project.findByIdAndUpdate(req.params.id, {
         name: req.body.name,
         disc: req.body.disc,
         url: req.body.url,
         tags: req.body.tags,
-        users: req.body.users
+        users: req.body.users,
+        admin: req.body.admin
     });
 
     if(!project) return res.status(404).send('The project with given ID was not found');

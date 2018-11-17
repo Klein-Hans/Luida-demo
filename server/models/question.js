@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const questionSchema = new mongoose.Schema({
     poster : {
         type: String,
-        required: true
+        required: true,
+        ref: "User"
     },
     date: {
         type: Date,
@@ -23,9 +24,9 @@ const questionSchema = new mongoose.Schema({
         required: true
     },
     answer: [{
-        type: Object,
+        type: mongoose.Schema.Types.ObjectId,
         required: false,
-        ref: "Answer"
+        ref: 'Answer'
     }],
     favorite: {
         type: Number,
@@ -33,7 +34,7 @@ const questionSchema = new mongoose.Schema({
     }
 });
 
-const Question = mongoose.model('Question', questionSchema, 'posts');
+const Question = mongoose.model('Question', questionSchema, 'questions');
 
 function validateQuestion(question){
     const schema = {
@@ -41,7 +42,8 @@ function validateQuestion(question){
         date: Joi.date().required(),
         title: Joi.string().required(),
         content: Joi.string().required(),
-        tags: Joi.array().required()
+        tags: Joi.array().required(),
+        favorite: Joi.number()
 
     };
     return Joi.validate(question, schema);

@@ -2,6 +2,7 @@ const {Question, validate} = require('../models/question');
 const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
+
 mongoose.connect('mongodb://localhost/luidatest')
 .then(() => console.log('connected to Mongodb...'))
 .catch(err => console.log('Could not connect to MongoDB'));
@@ -17,7 +18,8 @@ router.get('/', async (req, res) => {
 
 // View Question detaile
 router.get('/:id', async (req, res) => {
-    const quesiton = await Question.findById(req.params.id).populate('answers')
+    const quesiton = await Question.findById(req.params.id).populate([{
+        path: "poster"}, {path: "answer", populate: {path: "respondent"}}])
     if (!quesiton) {
         return res.status(404)
     .send('The user with the given ID was not found.');
@@ -36,7 +38,8 @@ router.post('/', async (req, res) => {
         date: req.body.date,
         title: req.body.title,
         content: req.body.content,
-        tags: req.body.tags
+        tags: req.body.tags,
+        favorite: 0
     });
     try{
         question = await question.save();
@@ -50,17 +53,8 @@ router.post('/', async (req, res) => {
 
 // Question Edit and post answer
 router.put('/:id', async (req, res) => {
-    const { error } = validate(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
-
     const quesiton = await Question.findByIdAndUpdate(req.params.id, {
-        poster: req.body.poster, 
-        date: req.body.date,
-        title: req.body.title,
-        content: req.body.content,
-        tags: req.body.content,
-        answer: req.body.answer,
-        favorite: req.body.answer
+        $set: { answer: req.body.answer }
     })
 
     if(!quesiton) return res.status(404).send('The question with given ID was not found');

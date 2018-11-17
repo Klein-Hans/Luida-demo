@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 
 // View User detaile
 router.get('/:id', async (req, res) => {
-    const users = await User.findById(req.params.id).populate('projects')
+    const users = await User.findById(req.params.id).populate('projects questions')
     if (!users) {
         return res.status(404)
     .send('The user with the given ID was not found.');

@@ -23,7 +23,12 @@ const projectSchema = new mongoose.Schema({
         type: String,
         required: false,
         ref: "User"
-    }]
+    }],
+    admin: {
+        type: String,
+        required: true,
+        ref: "User"
+    }
 });
 
 const Project = mongoose.model('Project', projectSchema, 'projects');
@@ -34,7 +39,7 @@ function validateProject(project){
         disc: Joi.string().required(),
         url: Joi.string().required(),
         tags: Joi.array().required(),
-        users: Joi.array()
+        admin: Joi.string().required()
     };
     return Joi.validate(project, schema);
 }

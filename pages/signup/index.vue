@@ -118,11 +118,12 @@
           .then( async () => {
             var user = await firebase.auth().currentUser.uid
             var id = user.toString()
+            var icon = await axios.get("https://avataaars-api.now.sh/")
             var userinfo = await axios.post("http://127.0.0.1:3000/api/users/", {
               id: id, 
               username: this.username,
               disc: "Hello! My name is " + this.username,
-              url: 'https://www.tus.ac.jp/info/about/images/chara01.jpg',
+              url: icon.url,
               campus: this.campus,
               grade: this.grade,
               tags: this.tags

@@ -34,7 +34,7 @@ import axios from 'axios'
       }
 		},
 		async asyncData({params, store}){
-      const url = "http://127.0.0.1:3000/api/posts"
+      const url = "http://127.0.0.1:3000/api/questions"
       let { data } = await axios.get(url, {
         params: {
           array: store.state.tags
