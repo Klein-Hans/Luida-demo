@@ -63,7 +63,7 @@ router.put('/projects/:id', async (req, res) => {
 router.put('/questions/:id', async (req, res) => {
     var user = await User.findByIdAndUpdate(req.params.id, {
         $push: {
-            questions: req.body.questions
+            questions: req.body.question
         }
     })
     if(!user) return res.status(404).send('The user with given ID was not found');

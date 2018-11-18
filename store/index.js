@@ -6,7 +6,8 @@ const createStore = () => {
       authUser: null,
       authTags: null,
       authUrl: null,
-      authName: null
+      authName: null,
+      authProject: []
     },
     mutations: {
       setUserId(state, authUser){
@@ -23,6 +24,9 @@ const createStore = () => {
       },
       setName(state, authName){
         state.authName = authName
+      },
+      setProject(state, authProject){
+        state.authProject = authProject
       }
     },
     getters: {

@@ -30,7 +30,7 @@
 
 <script>
   import firebase from 'firebase'
-import Axios from 'axios';
+import axios from 'axios';
 
   export default {
     data: () => ({
@@ -49,6 +49,8 @@ import Axios from 'axios';
           this.$store.commit('setTags', data.tags)
           this.$store.commit('setUrl', data.url)
           this.$store.commit('setName', data.username)
+          this.$store.commit('setProject', data.projects)
+          this.$router.push(`/users/${this.$store.state.authUser}`)
         })
         .catch(error => {
           alert(error.message)

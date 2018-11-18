@@ -21,7 +21,7 @@
         <v-chip close outline color="secondary" v-for="(tag, i) in tags" :key="i" @input="deleteTag(i)">{{
           tags[i] }}</v-chip>
 
-        <v-btn block color="red lighten-1" class="login-btn white--text" @click="submit" :disabled="!title || !disc || !tags" depressed>
+        <v-btn block color="red lighten-1" class="login-btn white--text" @click="submit()" :disabled="!title || !disc || !tags" depressed>
           Submit</v-btn>
       </form>
     </v-container>
@@ -40,6 +40,8 @@
     }),
     methods: {
       async submit() {
+        console.log(this.$store.state.authUrl)
+        console.log(this.$store.state.authUser)
         try{
             let {data} = await axios.post("http://127.0.0.1:3000/api/projects", {
                 name: this.title,
@@ -48,11 +50,20 @@
                 tags: this.tags,
                 admin: this.$store.state.authUser
             })
-            this.$router.push(`users/${this.$store.state.authUser}`)
+            this.$store.commit('setProject', data._id)
+            this.$router.push(`/projects/${data._id}`)
         }
         catch(err){
             console.log('project', err.message)
+        }
+        try{
+          let {data} = await axios.put(`http://127.0.0.1:3000/api/users/projects/${this.$store.state.authUser}`,{
+            project: data._id
+          })
         } 
+        catch(err){
+          console.log('user', err.message)
+        }
       },
       addLabel() {
         if (this.another) {

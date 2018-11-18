@@ -30,7 +30,7 @@
 
 <script>
   import firebase from 'firebase'
-  import Axios from 'axios';
+  import axios from 'axios';
 
   export default {
     data: () => ({
@@ -49,14 +49,19 @@
                 content: this.question,
                 tags: this.tags
             })
+            this.$router.push(`/users/${this.$store.state.authUser}`)
         }
         catch(err){
             console.log('project', err.message)
+        }
+        try{
+          let {data} = await axios.put(`http://127.0.0.1:3000/api/users/questions/${this.$store.state.authUser}`,{
+            question: data._id
+          })
         } 
-      },
-      clear() {
-        this.name = ''
-        this.email = ''
+        catch(err){
+          console.log('user', err.message)
+        } 
       },
       addLabel() {
         if (this.another) {

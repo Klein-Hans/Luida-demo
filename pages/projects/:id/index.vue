@@ -11,13 +11,13 @@
         ></v-img>
 				<v-card-title primary-title>
           <div>
-            <h3 class="headline">{{ project.name }}</h3>
-            <div class="text-xs-center">{{ project.disc }}</div>
+            <h3 class="display-3">{{ project.name }}</h3>
+            <div class="title">{{ project.disc }}</div>
           </div>
         </v-card-title>
 				<v-card-actions>
           <div class="text-xs-center">
-    				<v-chip color="indigo darken-1" text-color="white" v-for="(tag, i) in project.tags" :key="i">{{ project.tags[i] }}</v-chip>
+    				<v-chip color="indigo darken-1 title" text-color="white" v-for="(tag, i) in project.tags" :key="i">{{ project.tags[i] }}</v-chip>
   				</div>
         </v-card-actions>
 				<div class="spacer"></div>
@@ -29,6 +29,13 @@
     </v-flex>
 		<v-flex xs12 sm7 md8>
 			<v-container>
+        <div class="display-1">Member</div>
+        <br>
+        <v-divider></v-divider>
+        <br>
+        <v-alert :value="true" color="info" icon="info" outline class="title" v-show="project.users.length === 0">
+          There is no member yet.
+        </v-alert>
         <projectmember :member=project.users />
 			</v-container>
 		</v-flex>
