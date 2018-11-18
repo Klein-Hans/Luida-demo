@@ -13,26 +13,27 @@
           <div>
 						<v-list>
 									<v-list-tile>
-										<v-list-tile-content class="display-1">{{ user.username }}</v-list-tile-content>
+										<v-list-tile-content class="display-3">{{ user.username }}</v-list-tile-content>
 									</v-list-tile>
+									<br>
 									<v-list-tile>
-										<v-list-tile-content class="text-xs-center">{{ user.disc }}</v-list-tile-content>
+										<v-list-tile-content class="title">{{ user.disc }}</v-list-tile-content>
 									</v-list-tile>
 									<br>
                   <v-list-tile>
                     <v-list-tile-action>
-                      <v-icon color="indigo">location_on</v-icon>
+                      <v-icon x-large color="indigo">location_on</v-icon>
                     </v-list-tile-action>
                     <v-list-tile-content>
-                      <v-list-tile-title>{{ user.campus }}</v-list-tile-title>
+                      <v-list-tile-title class="title">{{ user.campus }}</v-list-tile-title>
                     </v-list-tile-content>
                   </v-list-tile>
                   <v-list-tile>
                     <v-list-tile-action>
-                      <v-icon color="indigo">school</v-icon>
+                      <v-icon x-large color="indigo">school</v-icon>
                     </v-list-tile-action>
                     <v-list-tile-content>
-                      <v-list-tile-title>{{ user.grade }}</v-list-tile-title>
+                      <v-list-tile-title class="title">{{ user.grade }}</v-list-tile-title>
                     </v-list-tile-content>
                   </v-list-tile>
             </v-list>
@@ -41,20 +42,48 @@
 				<v-divider></v-divider>
 				<v-card-actions>
           <div class="text-xs-center">
-    				<v-chip color="indigo darken-1" text-color="white" v-for="(tag, i) in user.tags" :key="i">{{ user.tags[i] }}</v-chip>
+    				<v-chip color="indigo darken-1 title" text-color="white" v-for="(tag, i) in user.tags" :key="i">{{ user.tags[i] }}</v-chip>
   				</div>
+					<v-btn fab absolute right bottom color="pink" dark>
+						<v-icon large>group_add</v-icon>
+					</v-btn>
         </v-card-actions>
-				<div class="spacer"></div>
-					<userbutton />
         </v-card>
 				</v-container>
     </v-flex>
 		<v-flex xs12 sm7 md8>
 			<v-container>
+				<div class="display-1">Projects</div>
+				<br>
+				<v-divider></v-divider>
+				<br>
+				<v-alert
+					:value="true"
+					color="info"
+					icon="info"
+					outline
+					class="title"
+					v-show="user.projects.length === 0"
+				>
+      		There is no project yet.
+    		</v-alert>
 				<userproject :projects="user.projects" />
 			</v-container>
 		</v-flex>
-		
+		<v-flex xs12 sm12 md8>
+			<v-container>
+			<v-alert
+					:value="true"
+					color="info"
+					icon="info"
+					outline
+					class="title"
+					v-show="user.questions.length === 0"
+				>
+      		There is no question yet.
+    		</v-alert>
+				</v-container>
+		</v-flex>
   </v-layout>
 </template>
 

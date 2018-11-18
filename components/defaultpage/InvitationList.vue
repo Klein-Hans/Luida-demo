@@ -1,6 +1,6 @@
 <template>
   <v-menu offset-y>
-    <v-btn slot="activator" flat>
+    <v-btn slot="activator" flat class="hidden-xs-and-down">
       <v-badge color="pink" overlap>
         <v-icon>notifications</v-icon>
         <span slot="badge">{{ items.length }}</span>

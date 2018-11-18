@@ -82,7 +82,6 @@
 					console.log('answer', err.message)
 				}
 				try{
-					this.question.answer.push(adata.data._id)
 				var qdata = await axios.put(`${url}questions/${this.$route.params.id}`, {
 					answer: data
 				})

@@ -8,13 +8,14 @@
     >
       <v-spacer></v-spacer>
 			<v-toolbar-items class="toolbar-imtes">
-				<v-btn icon to="/search" nuxt>
+				<v-btn icon to="/search" nuxt class="hidden-sm-and-down">
 					<v-icon class="icon">search</v-icon>
         </v-btn>
         <messagelist />
         <invitationList />
+        <plusmenu />
         <profileInNavbar />
-				<v-btn icon @click.stop="rightDrawer = !rightDrawer" class="hidden-md-and-up">
+				<v-btn icon @click.stop="rightDrawer = !rightDrawer" class="hidden-sm-and-up">
 					<v-icon class="icon">menu</v-icon>
 				</v-btn>
 			</v-toolbar-items>
@@ -28,7 +29,7 @@
       temporary
       fixed
     >
-      <v-list>
+      <v-list >
         <v-list-tile avatar :to="'/users/' + $store.state.authUser">
           <v-list-tile-avatar>
             <img :src=$store.state.authUrl>
@@ -89,6 +90,7 @@
   import messagelist from '~/components/defaultpage/MessageList.vue'
   import invitationList from '~/components/defaultpage/InvitationList.vue'
   import profileInNavbar from '~/components/defaultpage/Profile.vue'
+  import plusmenu from '~/components/defaultpage/Plusmenu.vue'
   export default {
     data() {
       return {
@@ -108,7 +110,8 @@
     components: {
       messagelist,
       invitationList,
-      profileInNavbar
+      profileInNavbar,
+      plusmenu
     }
   }
 </script>
