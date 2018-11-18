@@ -12,11 +12,11 @@
                   <div>
                     <v-list>
 									<v-list-tile>
-										<v-list-content class="text-xs-center">{{ user.name }}</v-list-content>
+										<v-list-content class="headline">{{ user.name }}</v-list-content>
 									</v-list-tile>
 									<br>
 									<v-list-tile>
-										<v-list-content class="grey--text">{{ user.disc }}</v-list-content>
+										<v-list-content class="title">{{ user.disc }}</v-list-content>
 									</v-list-tile>
 									<br>
             </v-list>
@@ -26,7 +26,7 @@
             </v-layout>
             <v-card-actions>
           <div class="text-xs-center">
-    				<v-chip outline color="indigo darken-1" v-for="(tag, i) in user.tags" :key="i">{{ user.tags[i] }}</v-chip>
+    				<v-chip outline color="indigo darken-1" v-for="(tag, i) in user.tags" :key="i" class="headline">{{ user.tags[i] }}</v-chip>
   				</div>
         </v-card-actions>
           </v-card>

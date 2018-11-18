@@ -7,7 +7,8 @@ const createStore = () => {
       authTags: null,
       authUrl: null,
       authName: null,
-      authProject: []
+      authProject: [],
+      authInvitation: []
     },
     mutations: {
       setUserId(state, authUser){
@@ -27,6 +28,12 @@ const createStore = () => {
       },
       setProject(state, authProject){
         state.authProject = authProject
+      },
+      addProject(state, authProject){
+        state.authProject.push(authProject)
+      },
+      setInvitation(state, authInvitation){
+        state.authInvitation = authInvitation
       }
     },
     getters: {

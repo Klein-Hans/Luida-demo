@@ -53,7 +53,7 @@
             await axios.put(`http://127.0.0.1:3000/api/users/projects/${this.$store.state.authUser}`,{
             project: data._id
             })
-            this.$store.commit('setProject', data._id)
+            this.$store.commit('addProject', data._id)
             this.$router.push(`/projects/${data._id}`)
         }
         catch(err){

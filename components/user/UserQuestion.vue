@@ -11,7 +11,7 @@
           </v-card-title>
           <v-card-actions>
             <div class="text-xs-center">
-              <v-chip outline color="indigo darken-1" v-for="(tag, i) in question.tags" :key="i">{{ question.tags[i] }}</v-chip>
+              <v-chip outline color="indigo darken-1" v-for="(tag, i) in question.tags" :key="i" class="title">{{ question.tags[i] }}</v-chip>
             </div>
           </v-card-actions>
         </v-card>

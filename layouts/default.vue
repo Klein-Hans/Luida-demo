@@ -12,7 +12,7 @@
 					<v-icon class="icon">search</v-icon>
         </v-btn>
         <messagelist />
-        <invitationList :invitations="invitations" />
+        <invitationList />
         <plusmenu />
         <profileInNavbar />
 				<v-btn icon @click.stop="rightDrawer = !rightDrawer" class="hidden-sm-and-up">
@@ -112,12 +112,6 @@
       invitationList,
       profileInNavbar,
       plusmenu
-    },
-    async asyncData(){
-      let {data} = await axios.get(`http://127.0.0.1:3000/api/invitations/${this.$store.state.authUser}`)
-      return {
-        invitations: data
-      }
     }
   }
 </script>

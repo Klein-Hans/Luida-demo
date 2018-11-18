@@ -1,12 +1,13 @@
 <template>
   <v-menu offset-y>
     <v-btn slot="activator" flat class="hidden-sm-and-down">
-      <v-badge color="pink">
+      <v-badge color="pink" overlap>
         <v-icon>notifications</v-icon>
+        <span slot="badge">{{ $store.state.authInvitation.length }}</span>
       </v-badge>
     </v-btn>
     <v-list two-line>
-      <template v-for="(invitation, index) in invitations">
+      <template v-for="(invitation, index) in $store.state.authInvitation">
         <v-list-tile :key="index">
           <v-list-tile-content>
             <v-list-tile-title>
