@@ -47,14 +47,12 @@ router.post('/', async (req, res) => {
     }
 });
 
+// add new user
 router.put('/:id', async(req, res) => {
     const project = await Project.findByIdAndUpdate(req.params.id, {
-        name: req.body.name,
-        disc: req.body.disc,
-        url: req.body.url,
-        tags: req.body.tags,
-        users: req.body.users,
-        admin: req.body.admin
+        $push: {
+            users: req.body.user
+        }
     });
 
     if(!project) return res.status(404).send('The project with given ID was not found');

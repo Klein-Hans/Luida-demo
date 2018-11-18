@@ -72,8 +72,8 @@
       async postMessage() {
 				const url = "http://127.0.0.1:3000/api/"
 				try{
-					var adata = await axios.post(`${url}answers/` , {
-          respondent: "JFJDKJFSIJFSJFS",
+					let { data } = await axios.post(`${url}answers/` , {
+          respondent: this.$store.state.authUser,
           date: Date.now(),
           content: this.comment
 				})
@@ -84,7 +84,7 @@
 				try{
 					this.question.answer.push(adata.data._id)
 				var qdata = await axios.put(`${url}questions/${this.$route.params.id}`, {
-					answer: this.question.answer
+					answer: data
 				})
 				}
 				catch(err){

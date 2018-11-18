@@ -54,7 +54,7 @@ router.post('/', async (req, res) => {
 // Question Edit and post answer
 router.put('/:id', async (req, res) => {
     const quesiton = await Question.findByIdAndUpdate(req.params.id, {
-        $set: { answer: req.body.answer }
+        $push: { answer: req.body.answer }
     })
 
     if(!quesiton) return res.status(404).send('The question with given ID was not found');

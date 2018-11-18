@@ -2,17 +2,19 @@ const Joi = require('joi');
 const mongoose = require('mongoose');
 
 const invitationSchema = new mongoose.Schema({
-    _id: {
+    user: {
         type: String,
-        required: true
+        required: true,
+        ref: "User"
     },
     date : {
         type: Date,
         required: true
     },
     project: {
-        type: String,
-        required: true
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "Project"
     }
 });
 
@@ -21,8 +23,8 @@ const Invitation = mongoose.model('Invitation', invitationSchema, 'invitations')
 function validateInvitation(invitation){
     const schema = {
         id: Joi.string().required(),
-        project: Joi.string().required(),
-        date: Joi.date().required()
+        date: Joi.date().required(),
+        project: Joi.required()
     };
     return Joi.validate(invitation, schema);
 }

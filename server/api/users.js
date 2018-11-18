@@ -49,22 +49,23 @@ router.post('/', async (req, res) => {
 });
 
 
-// User Profile Edit
-router.put('/:id', async (req, res) => {
-    const { error } = validate(req.body);
-    if (error) return res.status(400).send(error.details[0].message);
-
-    const user = await User.findByIdAndUpdate(req.params.id, {
-        username: req.body.username,
-        disc: req.body.disc,
-        url: req.body.url,
-        campus: req.body.campus,
-        grade: req.body.grade,
-        tags: req.body.tags,
-        projects: req.body.projects,
-        quesitons: req.body.quesitons
+// add project or add question depends on query param
+router.put('/projects/:id', async (req, res) => {
+    var user = await User.findByIdAndUpdate(req.params.id, {
+        $push: {
+            projects: req.body.project
+        }
     })
+    if(!user) return res.status(404).send('The user with given ID was not found');
+    res.send(user);
+})
 
+router.put('/questions/:id', async (req, res) => {
+    var user = await User.findByIdAndUpdate(req.params.id, {
+        $push: {
+            questions: req.body.questions
+        }
+    })
     if(!user) return res.status(404).send('The user with given ID was not found');
     res.send(user);
 })
