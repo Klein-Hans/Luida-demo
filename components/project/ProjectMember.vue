@@ -1,8 +1,8 @@
 <template>
     <div>
       <v-layout row wrap>
-        <v-flex xs6 sm6 md4 v-for="(user, index) in member" :key="index">
-          <v-card :to="'/users/'+user._id" nuxt class="card">
+        <v-flex xs12 sm6 md4 v-for="(user, index) in member" :key="index">
+          <v-card :to="'/users/'+user._id" nuxt class="card overflow-x-hidden" height="300">
             <v-layout row wrap>
               <v-flex xs6 sm6 md6>
                 <v-img :src=user.url aspect-ratio="1.0" class="image"></v-img>
@@ -20,7 +20,7 @@
             </v-layout>
             <v-card-actions>
           <div class="text-xs-center">
-    				<v-chip outline color="indigo darken-1" v-for="(tag, i) in user.tags" :key="i">{{ user.tags[i] }}</v-chip>
+    				<v-chip outline color="indigo darken-1" v-for="(tag, i) in user.tags" :key="i" class="title">{{ user.tags[i] }}</v-chip>
   				</div>
         </v-card-actions>
           </v-card>

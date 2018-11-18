@@ -50,7 +50,7 @@ import axios from 'axios';
           this.$store.commit('setUrl', data.url)
           this.$store.commit('setName', data.username)
           this.$store.commit('setProject', data.projects)
-          var { data } = await axios.get(`http://127.0.0.1:3000/api/invitations${id}`)
+          var { data } = await axios.get(`http://127.0.0.1:3000/api/invitations/${id}`)
           this.$store.commit('setInvitation', data)
           this.$router.push(`/users/${this.$store.state.authUser}`)
         })

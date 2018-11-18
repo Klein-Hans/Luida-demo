@@ -2,7 +2,7 @@
     <div>
       <v-layout row wrap>
         <v-flex xs12 sm6 md4 v-for="(project, index) in projects" :key="index">
-          <v-card :to="'/users/'+project._id" nuxt class="card" height="300">
+          <v-card :to="'/projects/'+project._id" nuxt class="card overflow-x-hidden" height="300">
             <v-layout row wrap>
               <v-flex xs6 sm6 md6>
                 <v-img :src=project.url aspect-ratio="1.0" class="image"></v-img>

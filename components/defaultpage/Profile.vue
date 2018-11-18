@@ -1,6 +1,6 @@
 <template>
   <v-menu offset-y>
-    <v-btn slot="activator" flat class="hidden-sm-and-down"> 
+    <v-btn slot="activator" flat class="hidden-xs-only"> 
       <v-avatar>
         <img :src=$store.state.authUrl>
       </v-avatar>

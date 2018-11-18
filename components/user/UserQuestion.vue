@@ -1,12 +1,11 @@
 <template>
   <div>
     <v-layout row wrap>
-      <v-flex xs6 sm6 md4 v-for="(question, index) in questions" :key="index">
-        <v-card :to="'/questions/'+question._id" nuxt class="card">
-          <v-card-title primary-title>
+      <v-flex xs12 sm6 md4 v-for="(question, index) in questions" :key="index">
+        <v-card :to="'/questions/'+question._id" nuxt class="card overflow-x-hidden" height="200">
+          <v-card-title primary-title class="overflow-y-hidden">
             <div>
               <h3 class="headline">{{ question.title }}</h3>
-              <div class="text-xs-center">{{ question.disc }}</div>
             </div>
           </v-card-title>
           <v-card-actions>

@@ -12,18 +12,13 @@
             </v-flex>
             <v-flex xs6 sm6 md6>
               <v-card-title primary-title>
-                <v-list>
-                    <v-list-tile>
-                        <v-list-tile-content class="display-2">
-                            {{ invitation.project.name }}
-                        </v-list-tile-content>
-                    </v-list-tile>
-                    <v-list-tile>
-                        <v-list-tile-content class="title">
-                            {{ invitation.project.disc }}
-                        </v-list-tile-content>
-                    </v-list-tile>
-                </v-list>
+                <div>
+                  <div class="display-2">{{ invitation.project.name }}</div>
+                  <br>
+                  <div class="title">
+                    {{ invitation.project.disc }}
+                  </div>
+                </div>
               </v-card-title>
             </v-flex>
           </v-layout>
