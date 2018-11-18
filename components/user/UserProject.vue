@@ -14,8 +14,6 @@
                     <div class="text-xs-center">{{ project.disc }}</div>
                   </div>
                 </v-card-title>
-                <v-card-actions>
-                </v-card-actions>
               </v-flex>
             </v-layout>
             <v-card-actions>

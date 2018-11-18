@@ -50,19 +50,14 @@
                 tags: this.tags,
                 admin: this.$store.state.authUser
             })
+            await axios.put(`http://127.0.0.1:3000/api/users/projects/${this.$store.state.authUser}`,{
+            project: data._id
+            })
             this.$store.commit('setProject', data._id)
             this.$router.push(`/projects/${data._id}`)
         }
         catch(err){
             console.log('project', err.message)
-        }
-        try{
-          let {data} = await axios.put(`http://127.0.0.1:3000/api/users/projects/${this.$store.state.authUser}`,{
-            project: data._id
-          })
-        } 
-        catch(err){
-          console.log('user', err.message)
         }
       },
       addLabel() {

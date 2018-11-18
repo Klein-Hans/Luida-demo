@@ -53,7 +53,7 @@ router.post('/', async (req, res) => {
 
 // Question Edit and post answer
 router.put('/:id', async (req, res) => {
-    const quesiton = await Question.findByIdAndUpdate(req.params.id, {
+    const quesiton = await Question.findOneAndUpdate({_id: req.params.id}, {
         $push: { answer: req.body.answer }
     })
 

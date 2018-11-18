@@ -1,20 +1,19 @@
 <template>
   <v-menu offset-y>
     <v-btn slot="activator" flat class="hidden-sm-and-down">
-      <v-badge color="pink" overlap>
+      <v-badge color="pink">
         <v-icon>notifications</v-icon>
-        <span slot="badge">{{ items.length }}</span>
       </v-badge>
     </v-btn>
     <v-list two-line>
-      <template v-for="(item, index) in items">
+      <template v-for="(invitation, index) in invitations">
         <v-list-tile :key="index">
           <v-list-tile-content>
             <v-list-tile-title>
-              {{ item.name }}
+              {{ invitation.project.name }}
             </v-list-tile-title>
             <v-list-tile-sub-title>
-              {{ item.sub }}
+              {{ invitation.project.disc }}
             </v-list-tile-sub-title>
             <v-list-tile-sub-title>
               <v-btn small color="blue darken-4" dark>Accept
@@ -27,36 +26,22 @@
             </v-list-tile-sub-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-divider :key="index" v-show="index < items.length - 1"></v-divider>
+        <v-divider :key="index" v-show="index < invitations.length - 1"></v-divider>
       </template>
     </v-list>
   </v-menu>
 </template>
 
 <script>
+import axios from 'axios'
   export default {
     name: 'invitationList',
     data() {
       return {
-        show: true,
-        items: [{
-            name: 'Tony',
-            avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-            sub: "I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
-          },
-          {
-            name: 'Tony',
-            avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-            sub: "I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
-          },
-          {
-            name: 'Tony',
-            avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-            sub: "I'll be in your neighborhood doing errands this weekend. Do you want to hang out?"
-          }
-        ]
+        show: true
       }
-    }
+    },
+    props:["invitations"]
   }
 
 </script>

@@ -49,7 +49,7 @@ router.post('/', async (req, res) => {
 
 // add new user
 router.put('/:id', async(req, res) => {
-    const project = await Project.findByIdAndUpdate(req.params.id, {
+    const project = await Project.findOneAndUpdate({_id: req.params.id}, {
         $push: {
             users: req.body.user
         }

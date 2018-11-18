@@ -43,7 +43,7 @@ router.post('/', async (req, res) => {
 
 // delete invitation after accepting of denying offer
 router.delete('/:id', async (req, res) => {
-    const invitation = await Invitation.findByIdAndRemove(req.params.id)
+    const invitation = await Invitation.findOneAndDelete({_id: req.params.id})
     try{
         res.send(invitation);
     }

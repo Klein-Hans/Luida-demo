@@ -51,7 +51,7 @@ router.post('/', async (req, res) => {
 
 // add project or add question depends on query param
 router.put('/projects/:id', async (req, res) => {
-    var user = await User.findByIdAndUpdate(req.params.id, {
+    var user = await User.findOneAndUpdate({_id: req.params.id}, {
         $push: {
             projects: req.body.project
         }
@@ -61,7 +61,7 @@ router.put('/projects/:id', async (req, res) => {
 })
 
 router.put('/questions/:id', async (req, res) => {
-    var user = await User.findByIdAndUpdate(req.params.id, {
+    var user = await User.findOneAndUpdate({_id: req.params.id}, {
         $push: {
             questions: req.body.question
         }

@@ -68,6 +68,7 @@
         <v-alert :value="true" color="info" icon="info" outline class="title" v-show="user.questions.length === 0">
           There is no question yet.
         </v-alert>
+        <userquestion :questions="user.questions" />
       </v-container>
     </v-flex>
 		<v-container>
@@ -98,18 +99,21 @@
 <script>
   import userproject from '~/components/user/UserProject.vue'
   import userbutton from '~/components/user/UserButton.vue'
+  import userquestion from '~/components/user/UserQuestion.vue'
   import axios from 'axios'
   export default {
     data() {
       return {
 				dialog: false,
 				selectProject: '',
-				project: []
+        project: [],
+        projectid: null
       }
     },
     components: {
       userproject,
-      userbutton
+      userbutton,
+      userquestion
 		},
 		created() {
 			if(this.$store.state.authProject.length > 0){
@@ -122,16 +126,17 @@
 			async inviteMember(){
 				if(this.$store.state.authProject.length > 0){
 					this.$store.state.authProject.forEach(element => {
-					if(element.name === this.selectProject){
-						var id = element._id
+					if(element.name == this.selectProject){
+            this.projectid = element._id
 					}
-					});
+					})
 					try{
 						let { data } = await axios.post("http://127.0.0.1:3000/api/invitations", {
 							user: this.user._id,
-							project: id,
+							project: this.projectid,
 							date: Date.now()
-						})
+            })
+            this.dialog =false
 					}
 					catch(err){
 						console.log('invite', err.message)

@@ -12,7 +12,7 @@
 					<v-icon class="icon">search</v-icon>
         </v-btn>
         <messagelist />
-        <invitationList />
+        <invitationList :invitations="invitations" />
         <plusmenu />
         <profileInNavbar />
 				<v-btn icon @click.stop="rightDrawer = !rightDrawer" class="hidden-sm-and-up">
@@ -30,7 +30,7 @@
       fixed
     >
       <v-list >
-        <v-list-tile avatar :to="'/users/' + $store.state.authUser">
+        <v-list-tile avatar :to="'/users/' + $store.state.authUser" nuxt>
           <v-list-tile-avatar>
             <img :src=$store.state.authUrl>
           </v-list-tile-avatar>
@@ -57,7 +57,7 @@
           </v-list-tile-action>
           <v-list-tile-title>Timeline</v-list-tile-title>
         </v-list-tile>
-        <v-list-tile>
+        <v-list-tile :to="'/invitations/' + $store.state.authUser" nuxt>
           <v-list-tile-action>
             <v-icon light>notifications</v-icon>
           </v-list-tile-action>
@@ -112,6 +112,12 @@
       invitationList,
       profileInNavbar,
       plusmenu
+    },
+    async asyncData(){
+      let {data} = await axios.get(`http://127.0.0.1:3000/api/invitations/${this.$store.state.authUser}`)
+      return {
+        invitations: data
+      }
     }
   }
 </script>
