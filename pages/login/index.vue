@@ -11,6 +11,10 @@
       v-model="password"
       label="Password"
       required
+      :append-icon="show1 ? 'visibility_off' : 'visibility'"
+      :type="show1 ? 'text' : 'password'"
+      name="input-10-1"
+      @click:append="show1 = !show1"
     ></v-text-field>
     <div class="note">パスワードをお忘れですか？</div>
     
@@ -35,7 +39,8 @@ import axios from 'axios';
   export default {
     data: () => ({
       password: '',
-      email: ''
+      email: '',
+      show1: false
     }),
     methods: {
       signIn(){

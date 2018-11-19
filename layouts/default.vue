@@ -8,7 +8,7 @@
     >
       <v-spacer></v-spacer>
 			<v-toolbar-items class="toolbar-imtes">
-				<v-btn icon to="/search" nuxt class="hidden-sm-and-down">
+				<v-btn icon to="/search" nuxt class="hidden-xs-only">
 					<v-icon class="icon">search</v-icon>
         </v-btn>
         <messagelist />
@@ -120,6 +120,8 @@
 .page{
   margin-top: 90px;
 }
-.wf-notosansjapanese { font-family: "Noto Sans JP"; }
+.title{
+  font-family: 'Ubuntu', sans-serif;
+}
 </style>
 

@@ -40,8 +40,6 @@
     }),
     methods: {
       async submit() {
-        console.log(this.$store.state.authUrl)
-        console.log(this.$store.state.authUser)
         try{
             let {data} = await axios.post("http://127.0.0.1:3000/api/projects", {
                 name: this.title,
@@ -50,10 +48,10 @@
                 tags: this.tags,
                 admin: this.$store.state.authUser
             })
+            this.$store.commit('addProject', data)
             await axios.put(`http://127.0.0.1:3000/api/users/projects/${this.$store.state.authUser}`,{
-            project: data._id
+              project: data._id
             })
-            this.$store.commit('addProject', data._id)
             this.$router.push(`/projects/${data._id}`)
         }
         catch(err){

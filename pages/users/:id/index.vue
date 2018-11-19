@@ -6,15 +6,9 @@
           <v-img :src=user.url aspect-ratio="1.0"></v-img>
           <v-card-title primary-title>
             <div>
+              <h3 class="display-3">{{ user.username }}</h3>
+              <div class="title">{{ user.disc }}</div>
               <v-list>
-                <v-list-tile>
-                  <v-list-tile-content class="display-3">{{ user.username }}</v-list-tile-content>
-                </v-list-tile>
-                <br>
-                <v-list-tile>
-                  <v-list-tile-content class="title">{{ user.disc }}</v-list-tile-content>
-                </v-list-tile>
-                <br>
                 <v-list-tile>
                   <v-list-tile-action>
                     <v-icon x-large color="indigo">location_on</v-icon>
