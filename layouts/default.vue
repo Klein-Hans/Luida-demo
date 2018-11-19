@@ -4,7 +4,7 @@
     <v-toolbar
       fixed
       color="white"
-      v-show="$store.getters.isAuthenticated !== null"
+      v-show="$store.getters.isAuthenticated === true"
     >
       <v-spacer></v-spacer>
 			<v-toolbar-items class="toolbar-imtes">

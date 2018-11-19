@@ -29,7 +29,7 @@
 </template>
 
 <script>
-  import axios from 'axios';
+  import axios from '~/plugins/axios'
 
   export default {
     data: () => ({
@@ -41,7 +41,7 @@
     methods: {
       async submit() {
         try{
-            let {data} = await axios.post("http://127.0.0.1:3000/api/projects", {
+            let {data} = await axios.post("/api/projects", {
                 name: this.title,
                 disc: this.disc,
                 url: this.$store.state.authUrl,
@@ -49,7 +49,7 @@
                 admin: this.$store.state.authUser
             })
             this.$store.commit('addProject', data)
-            await axios.put(`http://127.0.0.1:3000/api/users/projects/${this.$store.state.authUser}`,{
+            await axios.put(`/api/users/projects/${this.$store.state.authUser}`,{
               project: data._id
             })
             this.$router.push(`/projects/${data._id}`)

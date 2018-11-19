@@ -19,6 +19,9 @@ module.exports = {
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Ubuntu:500'}
     ]
   },
+  env: {
+    baseUrl: process.env.BASE_URL || '127.0.0.1'
+  },
 
   /*
   ** Customize the progress-bar color

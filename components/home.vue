@@ -13,7 +13,7 @@
               <v-card-text>
                 <v-text-field label="Email" v-model="email"></v-text-field>
                 <span class="caption grey--text text--darken-1">
-                  This is the email you will use to login to your Vuetify account
+                  This is the email you will use to login to your Rikahub account
                 </span>
               </v-card-text>
             </v-window-item>
@@ -98,6 +98,7 @@
   import axios from '~/plugins/axios'
 
   export default {
+    name: 'home',
     data: () => ({
       password: '',
       confirmpassword: '',

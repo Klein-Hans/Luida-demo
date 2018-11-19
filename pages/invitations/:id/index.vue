@@ -50,7 +50,7 @@
 </template>
 
 <script>
-  import axios from 'axios'
+  import axios from '~/plugins/axios'
   export default {
     data() {
       return {
@@ -60,10 +60,10 @@
     methods: {
         async acceptInvitation(index){
             try{
-                await axios.put(`http://127.0.0.1:3000/api/users/projects/${this.$store.state.authUser}`, {
+                await axios.put(`/api/users/projects/${this.$store.state.authUser}`, {
                 project: this.invitations[index].project
             })
-            await axios.delete(`http://127.0.0.1:3000/api/invitations/${this.invitations[index]._id}`)
+            await axios.delete(`/api/invitations/${this.invitations[index]._id}`)
             }
             catch(err){
                 console.log(err.message)
@@ -72,7 +72,7 @@
         },
         async denyInvitation(index){
             try{
-                await axios.delete(`http://127.0.0.1:3000/api/invitations/${this.invitations[index]._id}`)
+                await axios.delete(`/api/invitations/${this.invitations[index]._id}`)
             }
             catch(err){
                 console.log(err.message)
@@ -85,7 +85,7 @@
     }) {
       let {
         data
-      } = await axios.get(`http://127.0.0.1:3000/api/invitations/${params.id}`)
+      } = await axios.get(`/api/invitations/${params.id}`)
       return {
         invitations: data
       }

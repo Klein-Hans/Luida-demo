@@ -10,8 +10,9 @@
               <v-flex xs6 sm6 md6>
                 <v-card-title primary-title>
                   <div>
-                    <h3 class="headline">{{ user.name }}</h3>
-                    <div class="text-xs-center">{{ user.disc }}</div>
+                    <h3 class="display-1">{{ user.username }}</h3>
+                    <br>
+                    <div class="title">{{ user.disc }}</div>
                   </div>
                 </v-card-title>
                 <v-card-actions>

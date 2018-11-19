@@ -9,11 +9,11 @@
       </v-card-title>
       <v-card-text class="headline">
         {{ question.content }}
-        <div>{{ question.date }}</div>
+        <div class="grey--text">{{ question.date }}</div>
       </v-card-text>
       <v-card-actions>
         <span>
-          <v-chip color="indigo darken-1" text-color="white" v-for="(tag, i) in question.tags" :key="i">{{
+          <v-chip color="indigo darken-1" text-color="white" v-for="(tag, i) in question.tags" :key="i" class="title">{{
             question.tags[i] }}</v-chip>
         </span>
         <v-spacer></v-spacer>
@@ -61,7 +61,7 @@
 </template>
 
 <script>
-  import axios from 'axios'
+  import axios from '~/plugins/axios'
   export default {
     data() {
       return {
@@ -70,34 +70,28 @@
     },
     methods: {
       async postMessage() {
-				const url = "http://127.0.0.1:3000/api/"
 				try{
-					let { data } = await axios.post(`${url}answers/` , {
+					let { data } = await axios.post("/api/answers/" , {
           respondent: this.$store.state.authUser,
           date: Date.now(),
           content: this.comment
-				})
-				}
-				catch(err){
-					console.log('answer', err.message)
-				}
-				try{
-				var qdata = await axios.put(`${url}questions/${this.$route.params.id}`, {
+        })
+        this.question.answer.push(data)
+        await axios.put(`/api/questions/${this.$route.params.id}`, {
 					answer: data
 				})
 				}
 				catch(err){
-					console.log('question', err)
+					console.log('answer', err.message)
 				}
       }
     },
     async asyncData({
       params
     }) {
-      const url = "http://127.0.0.1:3000/api/questions/"
       let {
         data
-      } = await axios.get(`${url}${params.id}`)
+      } = await axios.get(`/api/questions/${params.id}`)
       return {
         question: data
       }

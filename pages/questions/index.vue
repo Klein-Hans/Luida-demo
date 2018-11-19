@@ -27,17 +27,16 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '~/plugins/axios'
   export default {
     data() {
       return {
       }
 		},
 		async asyncData({params, store}){
-      const url = "http://127.0.0.1:3000/api/questions"
-      let { data } = await axios.get(url, {
+      let { data } = await axios.get("/api/questions", {
         params: {
-          array: store.state.tags
+          array: store.state.authTags
         }
       })
       return { posts: data }

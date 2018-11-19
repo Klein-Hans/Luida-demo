@@ -45,7 +45,7 @@
 
 <script>
 import projectmember from '~/components/project/ProjectMember.vue'
-import axios from 'axios'
+import axios from '~/plugins/axios'
 export default {
 	data(){
 		return{
@@ -56,8 +56,7 @@ export default {
     projectmember
   },
   async asyncData({params}){
-    const url = "http://127.0.0.1:3000/api/projects/"
-    let { data } = await axios.get(`${url}${params.id}`)
+    let { data } = await axios.get(`/api/projects/${params.id}`)
     return {project: data}
   }
 }

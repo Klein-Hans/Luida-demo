@@ -38,7 +38,7 @@ const createStore = () => {
     },
     getters: {
       isAuthenticated: (state) => {
-        return state.authUser
+        return typeof state.authUser === "string"
       }
     }
   })

@@ -34,7 +34,7 @@
 
 <script>
   import firebase from 'firebase'
-import axios from 'axios';
+import axios from '~/plugins/axios'
 
   export default {
     data: () => ({
@@ -44,18 +44,17 @@ import axios from 'axios';
     }),
     methods: {
       signIn(){
-        const url = "http://127.0.0.1:3000/api/users/"
         firebase.auth().signInWithEmailAndPassword(this.email, this.password)
         .then( async () => {
           var user = await firebase.auth().currentUser.uid
           var id = user.toString()
-          var { data } = await axios.get(`${url}${id}`)
+          var { data } = await axios.get(`/api/users/${id}`)
           this.$store.commit('setUserId', id)
           this.$store.commit('setTags', data.tags)
           this.$store.commit('setUrl', data.url)
           this.$store.commit('setName', data.username)
           this.$store.commit('setProject', data.projects)
-          var { data } = await axios.get(`http://127.0.0.1:3000/api/invitations/${id}`)
+          var { data } = await axios.get(`/api/invitations/${id}`)
           this.$store.commit('setInvitation', data)
           this.$router.push(`/users/${this.$store.state.authUser}`)
         })

@@ -9,12 +9,12 @@
               </v-flex>
               <v-flex xs6 sm6 md6>
                 <v-card-title primary-title>
-                    <h3 class="title">{{ project.name }}</h3>
+                    <h3 class="display-1">{{ project.name }}</h3>
                 </v-card-title>
               </v-flex>
             </v-layout>
             <v-card-text>
-              <div class="subheading">{{ project.disc }}</div>
+              <div class="title">{{ project.disc }}</div>
             </v-card-text>
             <v-card-actions>
           <div class="text-xs-center">

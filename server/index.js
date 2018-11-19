@@ -15,6 +15,7 @@ const answers = require('./api/answers')
 const invitations = require('./api/invitations')
 const icons = require('./api/icons')
 
+
 app.set('port', port)
 
 // Import and Set Nuxt.js options

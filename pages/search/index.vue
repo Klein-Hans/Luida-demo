@@ -75,7 +75,7 @@
         <v-alert :value="true" color="info" icon="info" outline class="title" v-show="users.length === 0">
           No user matches the specified search criteria.
         </v-alert>
-          <userproject :projects=projects />
+          <userproject :projects=projects id="search-result" />
           <br>
 
           <div class="display-1">
@@ -95,7 +95,9 @@
 <script>
   import projectmember from '~/components/project/ProjectMember.vue'
   import userproject from '~/components/user/UserProject.vue'
-  import axios from 'axios'
+  import axios from '~/plugins/axios'
+  import * as easings from 'vuetify/es5/util/easing-patterns'
+
   export default {
     components: {
       projectmember,
@@ -107,7 +109,7 @@
         var array = []
         array.push(element)
         try{
-          let { data } = await axios.get('http://127.0.0.1:3000/api/search/users', {
+          let { data } = await axios.get('/api/search/users', {
           params: {
             array: array
           }
@@ -118,12 +120,15 @@
           console.log(err.message)
         }
         try{
-          let { data } = await axios.get('http://127.0.0.1:3000/api/search/projects', {
+          let { data } = await axios.get('/api/search/projects', {
           params:{
             array: array
           }
         })
         this.projects = data
+        this.$vuetify.goTo("#search-result",{
+          offset: -200
+        })
         }
         catch(err){
           console.log(err.message)
@@ -133,13 +138,14 @@
       },
       async searchByInfo(grade, campus){
         console.log('search started')
-        let { data } = await axios.get('http://127.0.0.1:3000/api/search/users/byinfo', {
+        let { data } = await axios.get('/api/search/users/byinfo', {
           params: {
             grade: this.selectedByGrade,
             campus: this.selectedByCampus
           }
         })
         this.users = data
+        this.$vuetify.goTo("#search-result")
       }
     },
     data() {

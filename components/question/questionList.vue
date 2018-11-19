@@ -76,14 +76,14 @@
 </template>
 
 <script>
+import axios from '~/plugins/axios'
   export default {
     data() {
       return {
       }
     },
     async asyncData({params}) {
-		const url = "http://127.0.0.1:3000/api/questions/"
-		let { data } = await axios.get(`${url}${params.id}`)
+		let { data } = await axios.get(`/api/questions/${params.id}`)
 		return { question: data }
 	}
   }

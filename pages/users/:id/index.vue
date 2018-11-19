@@ -94,7 +94,7 @@
   import userproject from '~/components/user/UserProject.vue'
   import userbutton from '~/components/user/UserButton.vue'
   import userquestion from '~/components/user/UserQuestion.vue'
-  import axios from 'axios'
+  import axios from '~/plugins/axios'
   export default {
     data() {
       return {
@@ -125,7 +125,7 @@
 					}
 					})
 					try{
-						let { data } = await axios.post("http://127.0.0.1:3000/api/invitations", {
+						let { data } = await axios.post("/api/invitations", {
 							user: this.user._id,
 							project: this.projectid,
 							date: Date.now()
@@ -141,10 +141,9 @@
     async asyncData({
       params
     }) {
-      const url = "http://127.0.0.1:3000/api/users/"
       let {
         data
-      } = await axios.get(`${url}${params.id}`)
+      } = await axios.get(`/api/users/${params.id}`)
       return {
         user: data
       }
