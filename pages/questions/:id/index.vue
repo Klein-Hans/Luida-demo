@@ -76,10 +76,16 @@
           date: Date.now(),
           content: this.comment
         })
-        this.question.answer.push(data)
         await axios.put(`/api/questions/${this.$route.params.id}`, {
 					answer: data
-				})
+        })
+        this.question.answer.push({
+          content: this.comment,
+          respondent: {
+            username: this.$store.state.authName,
+            url: this.$store.state.authUrl
+          }
+        })
 				}
 				catch(err){
 					console.log('answer', err.message)

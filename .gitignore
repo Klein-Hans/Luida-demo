@@ -82,3 +82,6 @@ dist
 
 #firebase
 firebase.js
+
+# Service Worker
+sw.*

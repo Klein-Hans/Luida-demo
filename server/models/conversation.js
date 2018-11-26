@@ -1,9 +1,27 @@
 const mongoose = require('mongoose')
 
 const conversationSchema = new mongoose.Schema({
-    participants : [{
-        type: String,
-        ref: 'User'
+    _id: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: false,
+        ref: "Project"
+    },
+    messages: [{
+        body: {
+            type: String
+        },
+        username: {
+            type: String
+        },
+        url: {
+            type: String
+        },
+        date: {
+            type: Date
+        },
+        userid: {
+            type: String
+        }
     }]
 });
 

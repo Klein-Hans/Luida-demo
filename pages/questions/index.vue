@@ -1,7 +1,7 @@
 <template>
   <v-container class="page">
     <v-container v-for="(post, index) in posts" :key="index" class="question">
-      <v-card :to="'/questions/'+post.id" nuxt>
+      <v-card :to="'/questions/'+post._id" nuxt>
 			<v-layout>
 				<v-flex>
 					

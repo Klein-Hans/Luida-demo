@@ -34,6 +34,9 @@ const createStore = () => {
       },
       setInvitation(state, authInvitation){
         state.authInvitation = authInvitation
+      },
+      deleteInvitation(state, index){
+        state.authInvitation.splice(index, 1)
       }
     },
     getters: {

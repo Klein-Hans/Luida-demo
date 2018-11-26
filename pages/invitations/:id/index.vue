@@ -60,10 +60,14 @@
     methods: {
         async acceptInvitation(index){
             try{
-                await axios.put(`/api/users/projects/${this.$store.state.authUser}`, {
-                project: this.invitations[index].project
-            })
-            await axios.delete(`/api/invitations/${this.invitations[index]._id}`)
+                let { data } = await axios.put(`/api/users/projects/${this.$store.state.authUser}`, {
+                project: this.invitations[index].project._id
+                })
+                await axios.put(`/api/projects/${this.invitations[index].project._id}`, {
+                  user: this.$store.state.authUser
+                })
+                await axios.delete(`/api/invitations/${this.invitations[index]._id}`)
+                this.$store.commit("deleteInvitation", index)
             }
             catch(err){
                 console.log(err.message)

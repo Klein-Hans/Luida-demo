@@ -52,6 +52,7 @@
             await axios.put(`/api/users/projects/${this.$store.state.authUser}`,{
               project: data._id
             })
+            await axios.post(`/api/chat/${data._id}`)
             this.$router.push(`/projects/${data._id}`)
         }
         catch(err){

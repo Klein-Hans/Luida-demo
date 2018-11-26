@@ -1,22 +1,20 @@
 <template>
-  <div>
     <v-layout row wrap>
       <v-flex xs12 sm6 md4 v-for="(question, index) in questions" :key="index">
-        <v-card :to="'/questions/'+question._id" nuxt class="card overflow-x-hidden" height="200">
-          <v-card-title primary-title class="overflow-y-hidden">
+        <v-card :to="'/questions/'+question._id" nuxt class="card">
+          <v-card-title primary-title>
             <div>
-              <h3 class="headline">{{ question.title }}</h3>
+              <h3 class="title">{{ question.title }}</h3>
             </div>
           </v-card-title>
           <v-card-actions>
             <div class="text-xs-center">
-              <v-chip outline color="indigo darken-1" v-for="(tag, i) in question.tags" :key="i" class="title">{{ question.tags[i] }}</v-chip>
+              <v-chip color="indigo darken-1" v-for="(tag, i) in question.tags" :key="i" class="title" text-color="white">{{ question.tags[i] }}</v-chip>
             </div>
           </v-card-actions>
         </v-card>
       </v-flex>
     </v-layout>
-  </div>
 </template>
 
 <script>

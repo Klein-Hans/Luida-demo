@@ -1,77 +1,35 @@
 const {Conversation} = require('../models/conversation');
-const {Message} = require('../models/message');
-const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
-mongoose.connect('mongodb://localhost/luidatest')
-.then(() => console.log('connected to Mongodb...'))
-.catch(err => console.log('Could not connect to MongoDB'));
 
-// get all chat by user id which is used to check if the user included into the project
-router.get('/', async (req, res) => {
-    const conversations = await Conversation.find({ participants: req.params.id }).select('_id')
-    if (!conversations) return res.status(404)
-    .send('The user with the given ID was not found.');
-    
-    // Set up empty array to hold conversations + most recent message
-    let fullConversations = [];
-    conversations.forEach(async conversation => {
-        const message = await Message.find({conversationId: conversation._id})
-        .sort('-createdAt')
-        .limit(1)
-        .populate({
-            path: "author",
-            select: "username"
-        })
-        if(!messages) return res.status(404)
-        .send('No message')
-        fullConversations.push(message);
-        if(fullConversations.length === conversations.length){
-            return res.status(200).json({conversations: fullConversations})
-        }
-    });
-});
-
+// when subscribe a channel they can get this api but when they get into the project, it wouldn't get used
 router.get('/:id', async (req, res) => {
-    const messages = await Message.find({conversationId: req.params.id}).select('createdAt body author')
-    .sort('-createdAt')
-    .populate('author')
+    let messages = await Conversation.findById(req.params.id).populate('messages')
     if(!messages) return res.status(404).send('No message yet')
     res.send(messages)
 });
 
-router.post('/new/:recipient', async (req, res) => {
-    let conversation = new Conversation({
-        participants: [req.body.id, req.params.recipient]
+// create new conversation when group get created
+router.post('/:id', async (req, res) => {
+    let message = new Conversation({
+        _id: req.params.id
     });
     try{
-        conversation = await conversation.save();
-        let message = new Message({
-            conversationId: conversation._id,
-            body: req.body.composeMessage,
-            author: req.body.id
-        });
-        message = await message.save()
-        res.send(message);
+        message = await message.save();
+        res.send(message)
     }
     catch(err){
-        console.log(err.message);
+        console.log(err);
     }
 });
 
-router.post('/:id', async (req, res) => {
-    let reply = new Message({
-        conversationId: req.params.id,
-        body: req.body.composeMessage,
-        author: req.body.id
+// just send message to group chat meaning this api would get called by time sent a message
+router.put('/:id', async (req, res) => {
+    let message = await Conversation.findOneAndUpdate({_id: req.params.id}, {
+        $push: { messages: req.body.message }
     });
-    try{
-        reply = await reply.save();
-        res.status(200).json({message: 'Reply successfully sent! '});
-    }
-    catch(err){
-        console.log('reply err');
-    }
-});
+    if(!message) res.status(400).send('no project in given id');
+    res.send(message);
+})
 
 module.exports = router;

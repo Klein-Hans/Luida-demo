@@ -11,7 +11,9 @@
 				<v-btn icon to="/search" nuxt class="hidden-xs-only">
 					<v-icon class="icon">search</v-icon>
         </v-btn>
-        <messagelist />
+        <v-btn icon :to="'/chat/'+$store.state.authUser" nuxt class="hidden-xs-only">
+					<v-icon class="icon">message</v-icon>
+        </v-btn>
         <invitationList />
         <plusmenu />
         <profileInNavbar />
@@ -45,7 +47,7 @@
           </v-list-tile-action>
           <v-list-tile-title>Search</v-list-tile-title>
         </v-list-tile>
-        <v-list-tile>
+        <v-list-tile :to="'/chat/' + $store.state.authUser" nuxt>
           <v-list-tile-action>
             <v-icon light>message</v-icon>
           </v-list-tile-action>
@@ -63,17 +65,17 @@
           </v-list-tile-action>
           <v-list-tile-title>Notification</v-list-tile-title>
         </v-list-tile>
-        <v-list-tile>
+        <v-list-tile to="/add/project" nuxt>
           <v-list-tile-action>
-            <v-icon light>settings</v-icon>
+            <v-icon light>group</v-icon>
           </v-list-tile-action>
-          <v-list-tile-title>Setting</v-list-tile-title>
+          <v-list-tile-title>New Project</v-list-tile-title>
         </v-list-tile>
-        <v-list-tile>
+        <v-list-tile to="/add/question" nuxt>
           <v-list-tile-action>
             <v-icon light>help</v-icon>
           </v-list-tile-action>
-          <v-list-tile-title>Help</v-list-tile-title>
+          <v-list-tile-title>New Question</v-list-tile-title>
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
@@ -87,7 +89,6 @@
 </template>
 
 <script>
-  import messagelist from '~/components/defaultpage/MessageList.vue'
   import invitationList from '~/components/defaultpage/InvitationList.vue'
   import profileInNavbar from '~/components/defaultpage/Profile.vue'
   import plusmenu from '~/components/defaultpage/Plusmenu.vue'
@@ -108,7 +109,6 @@
       }
     },
     components: {
-      messagelist,
       invitationList,
       profileInNavbar,
       plusmenu

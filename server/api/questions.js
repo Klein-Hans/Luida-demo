@@ -1,11 +1,6 @@
 const {Question, validate} = require('../models/question');
-const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
-
-mongoose.connect('mongodb://localhost/luidatest')
-.then(() => console.log('connected to Mongodb...'))
-.catch(err => console.log('Could not connect to MongoDB'));
 
 router.get('/', async (req, res) => {
     var arr =  req.query.array;

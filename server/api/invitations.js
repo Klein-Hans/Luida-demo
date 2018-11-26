@@ -1,10 +1,6 @@
 const {Invitation, validate} = require('../models/invitation');
-const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
-mongoose.connect('mongodb://localhost/luidatest')
-.then(() => console.log('connected to Mongodb...'))
-.catch(err => console.log('Could not connect to MongoDB'));
 
 // get all user for debuging
 router.get('/', async (req, res) => {
