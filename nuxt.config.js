@@ -48,8 +48,13 @@ module.exports = {
   */
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/pwa'
   ],
+   manifest: {
+     name: 'Rikahub',
+     lang: 'ja'
+   },
   /*
   ** Axios module configuration
   */
@@ -64,6 +69,9 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
+   vendor: [
+    'socket.io-client'
+   ],
     extend(config, ctx) {
       
     }

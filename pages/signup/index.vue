@@ -71,7 +71,7 @@
             <v-btn v-show="step < 3" color="primary" depressed @click="step++">
               Next
             </v-btn>
-            <v-btn outline :disabled="!username || !email || !password || !grade || !campus || !tags || password !== confirmpassword" v-show="step === 3" color="red lighten-1" depressed @click="signUp">
+            <v-btn outline :disabled="!username || !email || !password || !grade || !campus || tags.length < 2 || password !== confirmpassword" v-show="step === 3" color="red lighten-1" depressed @click="signUp">
               Register
             </v-btn>
             <v-container>

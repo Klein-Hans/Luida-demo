@@ -4,14 +4,8 @@
       <div class="display-1">
         <v-icon x-large>search</v-icon>
         Search by custom tag</div>
-        <v-layout row wrap>
-          <v-flex xs10 sm10 md10>
-            <v-text-field class="mx-3" flat label="Search" v-model="another"></v-text-field>
-          </v-flex>
-          <v-flex xs2 sm2 md2>
-            <v-btn flat @click="searchTags(another)"><v-icon large>search</v-icon></v-btn>
-          </v-flex>
-        </v-layout>
+        
+            <v-text-field class="mx-3" flat label="Search" v-model="another" append-icon="search" @click:append="searchTags(another)" @keyup.enter="searchTags(another)"></v-text-field>
     </v-container>
     <v-container>
       <div class="display-1">
@@ -19,15 +13,11 @@
         Search by popular tag</div>
       <v-layout row wrap>
       <v-flex xs6 sm3 md2 v-for="(tag, index) in taglist" :key="index">
-        <v-card class="card">
-          <v-img
-          :src=tag.url
-          aspect-ratio="1.0"
-          @click="searchTags(tag.name)"
-        ></v-img>
-        <v-card-text class="title">
-          {{tag.name}}
-        </v-card-text>
+        <v-card class="card" >
+          <div class="icon-card">
+          <img :src="tag.icon" @click="searchTags(tag.name)">
+          <div class="title">{{ tag.name }}</div>
+          </div>
         </v-card>
       </v-flex>
     </v-layout>
@@ -156,19 +146,19 @@
         selectedByCampus: [],
         selectedByGrade: [],
         grade: ['D2', 'D1', 'M2', 'M1', 'B4', 'B3', 'B2', 'B1'],
-        taglist: 
-        [{name: 'python', url: "https://cdn.icon-icons.com/icons2/112/PNG/512/python_18894.png"},
-        {name: 'matlab', url: "https://i.redd.it/1lihwxjxacxy.png"},
-        {name: "C", url: "https://www.codemate.com/wp-content/uploads/2016/02/C-icon-codemate.png"},
-        {name: "AI", url: "https://www.envisagenics.com/wp-content/uploads/2018/07/AI_Icon_Blue-300x291.png"},
-        {name: "tensorflow", url: "https://avatars1.githubusercontent.com/u/15658638?s=280&v=4"},
-        {name: "android", url: "https://png.pngtree.com/element_our/md/20180526/md_5b094360ac6d3.png"},
-        {name: "ios", url: "http://www.findtinytales.com/wp-content/uploads/2018/03/103184_apple_512x512.png"},
-        {name: "rasberry-pi", url: "https://raw.githubusercontent.com/iiiypuk/rpi-icon/master/256.png"},
-        {name: "java", url: "https://cdn.iconscout.com/icon/free/png-256/java-43-569305.png"},
-        {name: "toeic", url: "https://lh5.ggpht.com/zlkxbbOOSH23OIPDBgxkglMLBJK--zsD1mgwCQpdaCm1zL9Hnmcq8bIBU0c1RNF28BEZ=w300"},
-        {name: "c++", url: "https://cdn3.iconfinder.com/data/icons/programming-16/512/programming_6_00001-2-512.png"},
-        {name: "toefl", url: "http://www.mskools.com/Content/img/toefl-inner.png"}
+        taglist: [
+          {name: "matlab", icon: "https://img.icons8.com/nolan/64/000000/matlab.png"},
+          {name: "python", icon: "https://img.icons8.com/color/64/000000/python.png"},
+          {name: "ruby", icon: "https://img.icons8.com/color/64/000000/ruby-programming-language.png"},
+          {name: "c++", icon: "https://img.icons8.com/color/64/000000/c-plus-plus-logo.png"},
+          {name: "visual studio", icon: "https://img.icons8.com/color/64/000000/visual-studio.png"},
+          {name: "android", icon: "https://img.icons8.com/dusk/64/000000/android.png"},
+          {name: "ios", icon: "https://img.icons8.com/nolan/64/000000/ios-logo.png"},
+          {name: "semiconductor", icon: "https://img.icons8.com/color/64/000000/smartphone-cpu.png"},
+          {name: "architectual", icon: "https://img.icons8.com/doodle/64/000000/museum.png"},
+          {name: "physics", icon: "https://img.icons8.com/dusk/64/000000/physics.png"},
+          {name: "chemical", icon: "https://img.icons8.com/nolan/64/000000/test-tube.png"},
+          {name: "docker", icon: "https://img.icons8.com/color/64/000000/docker.png"}
         ]
             
       }
@@ -181,6 +171,9 @@
   .card{
     margin:10px;
     cursor: pointer;
+  }
+  .icon-card{
+    text-align: center;
   }
 
 </style>

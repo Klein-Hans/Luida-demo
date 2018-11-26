@@ -21,7 +21,7 @@
         <v-chip close outline color="secondary" v-for="(tag, i) in tags" :key="i" @input="deleteTag(i)">{{
           tags[i] }}</v-chip>
 
-        <v-btn block color="red lighten-1" class="login-btn white--text" @click="submit()" :disabled="!title || !disc || !tags" depressed>
+        <v-btn block color="red lighten-1" class="login-btn white--text" @click="submit()" :disabled="!title || !disc || tags.length < 1" depressed>
           Submit</v-btn>
       </form>
     </v-container>
